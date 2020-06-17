@@ -1,5 +1,6 @@
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible'
+Plug 'vim/killersheep'
 Plug 'jonathanfilip/vim-lucius'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'nvie/vim-flake8'
@@ -160,4 +161,9 @@ set guioptions-=r
 if $TERM_PROGRAM =~ "iTerm"
 let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
 let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
+endif
+if strftime("%H") < 12
+  set background=light
+else
+  set background=dark
 endif
