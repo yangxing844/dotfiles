@@ -5,6 +5,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'nvie/vim-flake8'
 Plug 'sheerun/vim-polyglot'
 Plug 'tell-k/vim-autopep8'
+Plug 'davidhalter/jedi-vim'
+let g:jedi#documentation_command= ''
 Plug 'godlygeek/tabular',{'for':'markdown'}
 Plug 'plasticboy/vim-markdown',{'for':'markdown'}
 Plug 'Yggdroot/indentLine',{'for':'python'}
@@ -84,8 +86,8 @@ au Filetype python set textwidth=79
 au Filetype python set expandtab
 au Filetype python set autoindent
 au Filetype python set fileformat=unix
-autocmd Filetype python set guifont=JetBrainsMono-Regular:h13
-autocmd Filetype python colorscheme space-vim-dark
+autocmd Filetype python set guifont=JetBrainsMono-Regular:h18
+autocmd Filetype python colorscheme onedark
 au Filetype python AirlineTheme dark
 au Filetype tex AirlineTheme dark
 autocmd Filetype python set foldmethod=indent
@@ -101,7 +103,7 @@ func! CompileRunGcc()
                   elseif search("set_trace()")
                           exec "!python3 %"
                   else
-                          exec "AsyncRun-mode=term -rows=10 -raw python3 %"
+                          exec "AsyncRun -mode=term -rows=10 -raw python3 %"
                           exec "wincmd p"
                   endif
           endif
@@ -155,3 +157,7 @@ set clipboard+=unnamed
 set encoding=utf-8
 set fileencodings=utf-8,chinese,latin-1
 set guioptions-=r
+if $TERM_PROGRAM =~ "iTerm"
+let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
+let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
+endif

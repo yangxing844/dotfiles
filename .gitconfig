@@ -1,2 +1,5 @@
 [core]
 	quotepath = false
+[user]
+	name = yangxing
+	email = yangxing844@gmail.com
