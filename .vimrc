@@ -7,7 +7,7 @@ Plug 'nvie/vim-flake8'
 Plug 'sheerun/vim-polyglot'
 Plug 'tell-k/vim-autopep8'
 Plug 'davidhalter/jedi-vim'
-let g:jedi#documentation_command= ''
+let g:jedi#documentation_command= '<leader>k'
 Plug 'godlygeek/tabular',{'for':'markdown'}
 Plug 'plasticboy/vim-markdown',{'for':'markdown'}
 Plug 'Yggdroot/indentLine',{'for':'python'}
@@ -62,7 +62,6 @@ map <F2> : browse oldfiles <CR>
 map <F6> : source~/.vimrc <CR>
 map <F8> : source~/.gvimrc<CR>
 nnoremap I 10k
-vnoremap I 10k
 nnoremap K 10j
 vnoremap K 10j
 nnoremap i k
