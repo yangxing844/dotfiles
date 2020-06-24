@@ -483,9 +483,9 @@ snippet pic "picture" i
             \begin{minipage}[t]{0.48\textwidth}
                 \centering
                 \includegraphics[width=6cm]{$2}
-                \caption*{}
-            \end{minipage}
-        \end{figure}
+				\caption*{}
+				\end{minipage}
+			\end{figure}
 
 $0
 endsnippet
@@ -500,26 +500,6 @@ snippet yq "lambda" iA
 \\lambda$0
 endsnippet
 
-context "math()"
-snippet tg "bigtrianglup" iA
-\\triangle
-endsnippet
-
-context "math()"
-snippet div "nabla" iA
-\\nabla
-endsnippet
-
-context "math()"
-snippet curl "curl" iA
-\\nabla\times
-endsnippet
-
-context "math()"
-snippet hb "hbar" iA
-\\hbar
-endsnippet
-
 snippet > ">=" i
 \\geqslant $0
 endsnippet
@@ -530,17 +510,6 @@ endsnippet
 
 snippet pr "propto" i
 \\propto
-endsnippet
-
-context "math()"
-snippet dart "partial 2" iA
-\\frac{\\partial^2 $1}{\\partial $2^2}$0
-endsnippet
-
-context "math()"
-priority 10
-snippet ht "hat" wA
-\hat{$1}$0
 endsnippet
 
 context "math()"
@@ -593,9 +562,7 @@ snippet qw "mathfont" iA
 \mathrm{$1}$0
 endsnippet
 
-snippet lb "mathbracket" wA
-\left[${1:some}\right]$0
-endsnippet
+
 
 context "math()"
 snippet e "e" w
@@ -606,7 +573,7 @@ snippet \a "alpha" i
 \\alpha
 endsnippet
 
-snippet .= "approx" i
+snippet = "approx" i
 \\approx $0
 endsnippet
 

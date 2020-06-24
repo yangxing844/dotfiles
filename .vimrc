@@ -8,6 +8,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tell-k/vim-autopep8'
 Plug 'davidhalter/jedi-vim'
 let g:jedi#documentation_command= '<leader>k'
+let g:jedi#popup_on_dot=0
 Plug 'godlygeek/tabular',{'for':'markdown'}
 Plug 'plasticboy/vim-markdown',{'for':'markdown'}
 Plug 'Yggdroot/indentLine',{'for':'python'}
@@ -25,7 +26,7 @@ set conceallevel=1
 hi Conceal ctermbg=none
 Plug 'lervag/vimtex'
 let g:tex_flavor='latex'
-let g:vimtex_quickfix_mode=0
+let g:vimtex_quickfix_mode = 0
 Plug '907th/vim-auto-save'
 let g:auto_save = 1  " enable AutoSave on Vim startup
 Plug 'sirver/ultisnips'
@@ -55,7 +56,7 @@ set encoding=utf-8
 " 指定配色方案是256色
 set t_Co=256
 set wildmenu
-colorscheme lucius
+colorscheme snow
 " 改键
 map <F1> :call UltiSnips#RefreshSnippets() <CR>
 map <F2> : browse oldfiles <CR>
