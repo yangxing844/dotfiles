@@ -6,9 +6,17 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'nvie/vim-flake8'
 Plug 'sheerun/vim-polyglot'
 Plug 'tell-k/vim-autopep8'
-Plug 'davidhalter/jedi-vim'
-let g:jedi#documentation_command= '<leader>k'
+Plug 'Valloric/YouCompleteMe'
+map <leader>a :YcmCompleter GoToDeclaration<CR>
+map <leader>d :YcmCompleter GoToDefinition<CR>
+map <leader>k :YcmCompleter GetDoc<CR>
+map <leader>f :YcmCompleter Fixit<CR>
+map <leader>F :YcmCompleter Format<CR>
+Plug 'pgavlin/pulumi.vim'
+Plug 'davidhalter/jedi-vim',{'for':'python'}
+let g:jedi#documentation_command= ''
 let g:jedi#popup_on_dot=0
+set completeopt-=preview
 Plug 'godlygeek/tabular',{'for':'markdown'}
 Plug 'plasticboy/vim-markdown',{'for':'markdown'}
 Plug 'Yggdroot/indentLine',{'for':'python'}
@@ -60,7 +68,7 @@ colorscheme snow
 " 改键
 map <F1> :call UltiSnips#RefreshSnippets() <CR>
 map <F2> : browse oldfiles <CR>
-map <F6> : source~/.vimrc <CR>
+map <C-r> : source~/.vimrc <CR>
 map <F8> : source~/.gvimrc<CR>
 nnoremap I 10k
 nnoremap K 10j
@@ -162,8 +170,45 @@ if $TERM_PROGRAM =~ "iTerm"
 let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
 let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
 endif
-if strftime("%H") < 20
+if  strftime("%H") < 7
+  set background=dark
+elseif strftime("%H")<19
   set background=light
 else
-  set background=dark
+    set background=dark
 endif
+
+function! g:UltiSnips_Complete()
+  call UltiSnips#ExpandSnippet()
+  if g:ulti_expand_res == 0
+    if pumvisible()
+      return "\<C-n>"
+    else
+      call UltiSnips#JumpForwards()
+      if g:ulti_jump_forwards_res == 0
+        return "\<TAB>"
+      endif
+    endif
+  endif
+  return ""
+endfunction
+
+function! g:UltiSnips_Reverse()
+  call UltiSnips#JumpBackwards()
+  if g:ulti_jump_backwards_res == 0
+    return "\<C-P>"
+  endif
+
+  return ""
+endfunction
+
+
+if !exists("g:UltiSnipsJumpForwardTrigger")
+  let g:UltiSnipsJumpForwardTrigger = "<tab>"
+endif
+if !exists("g:UltiSnipsJumpBackwardTrigger")
+  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+endif
+
+au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger     . " <C-R>=g:UltiSnips_Complete()<cr>"
+au InsertEnter * exec "inoremap <silent> " .     g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
