@@ -55,7 +55,7 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif  
 endfunction
-
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
@@ -67,15 +67,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'nvie/vim-flake8'
 Plug 'sheerun/vim-polyglot'
 Plug 'tell-k/vim-autopep8'
-"Plug 'Valloric/YouCompleteMe'
-"map <leader>a :YcmCompleter GoToDeclaration<CR>
-"map <leader>d :YcmCompleter GoToDefinition<CR>
-"map <leader>k :YcmCompleter GetDoc<CR>
-"map <leader>f :YcmCompleter Fixit<CR>
-"map <leader>F :YcmCompleter Format<CR>
-"Plug 'davidhalter/jedi-vim',{'for':'python'}
-"let g:jedi#documentation_command= ''
-"let g:jedi#popup_on_dot=0
 Plug 'godlygeek/tabular',{'for':'markdown'}
 Plug 'plasticboy/vim-markdown',{'for':'markdown'}
 Plug 'Yggdroot/indentLine',{'for':'python'}
@@ -84,10 +75,9 @@ Plug 'junegunn/seoul256.vim'
 
 Plug 'bling/vim-airline'
 let g:airline_powerline_fonts = 1
-
+let g:airline#extensions#tabline#enabled = 1
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'honza/vim-snippets'
-"Plug 'jiangmiao/auto-pairs'
 Plug 'skywind3000/asyncrun.vim'
 
 Plug 'KeitaNakamura/tex-conceal.vim',{'for':'tex'}
@@ -139,7 +129,9 @@ syntax on
 set mouse=vn
 set showcmd
 set cursorline
+if !has('nvim')
 set guifont=JetBrainsMonoNerdFontCompleteM-Medium:h18
+endif
 set nu
 set ruler
 
@@ -165,13 +157,14 @@ nnoremap L $
 vnoremap L $
 nnoremap U <C-r>
 map Y y$
-noremap <silent> <expr> j (v:count == 0 ? 'gk' : 'h')
+noremap <silent> <expr> i (v:count == 1 ? 'gk' : 'k')
 noremap <silent> <expr> k (v:count == 0 ? 'gj' : 'j')
 
 
 
-
-"autocmd Filetype python set guifont=DroidSansMonoNerdF-:h19
+if !has('nvim')
+autocmd Filetype python set guifont=DroidSansMonoNerdF-:h19
+endif
 nnoremap <F5> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
           exec "w"
@@ -236,53 +229,6 @@ set autowrite
 set clipboard+=unnamed
 set guioptions-=r
 if $TERM_PROGRAM =~ "iTerm"
-let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
-let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
 endif
-
-
-
-
-"------------------------commented------------------------------------
-"if  strftime("%H") < 7
-  "set background=dark
-"elseif strftime("%H")<19
-  "set background=light
-"else
-    "set background=dark
-"endif
-
-"function! g:UltiSnips_Complete()
-  "call UltiSnips#ExpandSnippet()
-  "if g:ulti_expand_res == 0
-    "if pumvisible()
-      "return "\<C-n>"
-    "else
-      "call UltiSnips#JumpForwards()
-      "if g:ulti_jump_forwards_res == 0
-        "return "\<TAB>"
-      "endif
-    "endif
-  "endif
-  "return ""
-"endfunction
-
-"function! g:UltiSnips_Reverse()
-  "call UltiSnips#JumpBackwards()
-  "if g:ulti_jump_backwards_res == 0
-    "return "\<C-P>"
-  "endif
-
-  "return ""
-"endfunction
-
-
-"if !exists("g:UltiSnipsJumpForwardTrigger")
-  "let g:UltiSnipsJumpForwardTrigger = "<tab>"
-"endif
-"if !exists("g:UltiSnipsJumpBackwardTrigger")
-  "let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-"endif
-
-"au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger     . " <C-R>=g:UltiSnips_Complete()<cr>"
-"au InsertEnter * exec "inoremap <silent> " .     g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
