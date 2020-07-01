@@ -1,6 +1,6 @@
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible'
-Plug 'vim/killersheep'
+Plug 'jiangmiao/auto-pairs'
 """"""""""""""
 "  supertab  "
 """"""""""""""
@@ -12,18 +12,17 @@ let g:SuperTabMappingBackward = '<tab>'
 """"""""""""""""""""""""""""
 Plug 'scrooloose/nerdtree'
 nmap <C-t> :NERDTreeToggle<CR>
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:NERDTreeGitStatusNodeColorization = 1
 let g:NERDTreeColorMapCustom = {
-    \ "Staged"    : "#0ee375",  
-    \ "Modified"  : "#d9bf91",  
-    \ "Renamed"   : "#51C9FC",  
-    \ "Untracked" : "#FCE77C",  
-    \ "Unmerged"  : "#FC51E6",  
-    \ "Dirty"     : "#FFBD61",  
-    \ "Clean"     : "#87939A",   
-    \ "Ignored"   : "#808080"   
-    \ } 
+    \ "Staged"    : "#0ee375",
+    \ "Modified"  : "#d9bf91",
+    \ "Renamed"   : "#51C9FC",
+    \ "Untracked" : "#FCE77C",
+    \ "Unmerged"  : "#FC51E6",
+    \ "Dirty"     : "#FFBD61",
+    \ "Clean"     : "#87939A",
+    \ "Ignored"   : "#808080"
+    \ }
 """""""""""""""""""""""
 "  coc configutation  "
 """""""""""""""""""""""
@@ -33,50 +32,51 @@ inoremap <expr><cr>    pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
 inoremap <expr><tab>   pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <expr><c-l> pumvisible() ? "\<c-p>" : "\<s-tab>"
 let g:coc_global_extensions = [
-  \ 'coc-pairs',
   \ 'coc-tsserver',
-  \ 'coc-eslint', 
-  \ 'coc-prettier', 
-  \ 'coc-json', 
+  \ 'coc-eslint',
+  \ 'coc-json',
   \ 'coc-python'
   \ ]
+nmap <leader>rn <Plug>(coc-rename)
 autocmd CursorHold * silent call CocActionAsync('highlight')
-"rename
-nmap <leader>r <Plug>(coc-rename)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nnoremap <silent> <leader>k :call <SID>show_documentation()<CR>
+nnoremap <silent> gk :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
   else
     call CocAction('doHover')
-  endif  
+  endif
 endfunction
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+"-------------------------Misc---------------------------
+Plug 'christoomey/vim-tmux-navigator'
+nnoremap trc :%s/\s\+$//<CR>
+nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
-Plug 'preservim/nerdcommenter'
-Plug 'jonathanfilip/vim-lucius'
-Plug 'preservim/nerdcommenter'
+Plug 'preservim/nerdcommenter',{'for':'python'}
 Plug 'vim-airline/vim-airline-themes'
-Plug 'nvie/vim-flake8'
 Plug 'sheerun/vim-polyglot'
 Plug 'tell-k/vim-autopep8'
 Plug 'godlygeek/tabular',{'for':'markdown'}
 Plug 'plasticboy/vim-markdown',{'for':'markdown'}
 Plug 'Yggdroot/indentLine',{'for':'python'}
 Plug 'yianwillis/vimcdoc'
-Plug 'junegunn/seoul256.vim'
-
+set foldmethod=indent
+set foldlevel=99
 Plug 'bling/vim-airline'
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
 Plug 'rafi/awesome-vim-colorschemes'
+
+"Plug 'davidhalter/jedi-vim'
 Plug 'honza/vim-snippets'
 Plug 'skywind3000/asyncrun.vim'
 
@@ -93,8 +93,6 @@ hi Conceal ctermbg=none
 Plug 'lervag/vimtex'
 let g:tex_flavor='latex'
 let g:livepreview_previewer = 'open -a Preview'
-autocmd Filetype tex setl updatetime=1
-
 let g:vimtex_quickfix_mode = 0
 Plug '907th/vim-auto-save'
 let g:auto_save = 1  " enable AutoSave on Vim startup
@@ -125,6 +123,8 @@ set encoding=utf-8
 set t_Co=256
 set wildmenu
 colorscheme onedark
+au Filetype tex colorscheme OceanicNext
+au Filetype tex AirlineTheme dark
 syntax on
 set mouse=vn
 set showcmd
@@ -140,25 +140,19 @@ map <F1> :call UltiSnips#RefreshSnippets() <CR>
 map <F2> : browse oldfiles <CR>
 map <C-r> : source~/.vimrc <CR>
 map <F8> : source~/.gvimrc<CR>
-nnoremap I 10k
-nnoremap K 10j
-vnoremap K 10j
-nnoremap i k
-vnoremap i k
-nnoremap k j
-vnoremap k j
-nnoremap j h
-vnoremap j h
-nnoremap h i
-vnoremap h i
-nnoremap J ^
-vnoremap J ^
-nnoremap L $
-vnoremap L $
+nnoremap I 10i
+nnoremap K 10k
+nnoremap J 10j
+vnoremap K 10k
+vnoremap K 10k
+nnoremap H 10h
+vnoremap H 10h
+nnoremap L 10l
+vnoremap L 10l
 nnoremap U <C-r>
 map Y y$
-noremap <silent> <expr> i (v:count == 1 ? 'gk' : 'k')
-noremap <silent> <expr> k (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 1 ? 'gk' : 'k')
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 
 
 
