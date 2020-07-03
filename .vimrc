@@ -43,7 +43,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nnoremap <silent> gk :call <SID>show_documentation()<CR>
+nnoremap <silent> <leader>k :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -53,7 +53,7 @@ function! s:show_documentation()
 endfunction
 "-------------------------Misc---------------------------
 Plug 'christoomey/vim-tmux-navigator'
-nnoremap trc :%s/\s\+$//<CR>
+nnoremap <silent> <c-c> :%s/\s\+$//<CR>
 nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
@@ -94,6 +94,13 @@ Plug 'lervag/vimtex'
 let g:tex_flavor='latex'
 let g:livepreview_previewer = 'open -a Preview'
 let g:vimtex_quickfix_mode = 0
+let g:vimtex_quickfix_latexlog = {
+          \ 'overfull' : 0,
+          \ 'underfull' : 0,
+          \ 'packages' : {
+          \   'default' : 0,
+          \ },
+          \}
 Plug '907th/vim-auto-save'
 let g:auto_save = 1  " enable AutoSave on Vim startup
 """""""""""""""""""""""""""""
@@ -107,58 +114,58 @@ let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 
 call plug#end()
 set rtp+=/usr/local/opt/fzf
-set history=1000
+set history=100
+set undolevels=100
+set title
 
 
 
 "----------------------------编码问题------------------------------
 set fileencodings=utf-8,gb2312,gbk,cp936,latin-1
-set fileencoding=utf-8
-set termencoding=utf-8
 set fileformat=unix
-set encoding=utf-8
 
 
 "-----------------------------apperance----------------------------
-set t_Co=256
-set wildmenu
 colorscheme onedark
-au Filetype tex colorscheme OceanicNext
-au Filetype tex AirlineTheme dark
-syntax on
 set mouse=vn
 set showcmd
-set cursorline
 if !has('nvim')
 set guifont=JetBrainsMonoNerdFontCompleteM-Medium:h18
 endif
 set nu
 set ruler
 
+"----------------------------performance--------------------------
+syntax on
+set lazyredraw
+augroup vimrc_autocmd
+	autocmd!
+	au Filetype tex colorscheme OceanicNext|AirlineTheme dark
+augroup END
 " -------------------------------改键-----------------------------
 map <F1> :call UltiSnips#RefreshSnippets() <CR>
 map <F2> : browse oldfiles <CR>
 map <C-r> : source~/.vimrc <CR>
 map <F8> : source~/.gvimrc<CR>
-nnoremap I 10i
 nnoremap K 10k
 nnoremap J 10j
 vnoremap K 10k
-vnoremap K 10k
+vnoremap J 10j
 nnoremap H 10h
 vnoremap H 10h
 nnoremap L 10l
 vnoremap L 10l
 nnoremap U <C-r>
 map Y y$
+nnoremap gl $
+nnoremap gh ^
+vnoremap gl $
+vnoremap gh ^
 noremap <silent> <expr> k (v:count == 1 ? 'gk' : 'k')
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 
 
 
-if !has('nvim')
-autocmd Filetype python set guifont=DroidSansMonoNerdF-:h19
-endif
 nnoremap <F5> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
           exec "w"
@@ -177,46 +184,30 @@ func! CompileRunGcc()
 
 endfunc
 set nocompatible
-set backspace=indent,eol,start
+set backspace=indent,eol,start "任何时候都可以输入回车"
 set backspace=2
 set autoindent
 set nobackup
 set nowritebackup
 set noswapfile
 
-" 用空格代替tab
-set expandtab
 
-" 设置显示制表符的空格字符个数,改进tab缩进值，默认为8，现改为4
 set tabstop=4
 
-" 统一缩进为4，方便在开启了et后使用退格(backspace)键，每次退格将删除X个空格
 set softtabstop=4
 
-" 设定自动缩进为4个字符，程序中自动缩进所使用的空白长度
 set shiftwidth=4
 
-" 设置帮助文件为中文(需要安装vimcdoc文档)
 set helplang=cn
 
-" 显示匹配的括号
 set showmatch
 
-" 文件缩进及tab个数
-au FileType html,python,vim,javascript setl shiftwidth=4
-au FileType html,python,vim,javascript setl tabstop=4
-au FileType java,php setl shiftwidth=4
-au FileType java,php setl tabstop=4
-" 高亮搜索的字符串
 set hlsearch
 
 " 检测文件的类型
 filetype on
 filetype plugin on
 filetype indent on
-set cindent
-
-" C风格缩进
 set cindent
 set noeb
 set autowrite
