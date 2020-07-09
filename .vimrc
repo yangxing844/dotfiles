@@ -5,8 +5,9 @@ Plug 'jiangmiao/auto-pairs'
 "  supertab  "
 """"""""""""""
 Plug 'ervandew/supertab'
-let g:SuperTabMappingForward = '<s-tab>'
-let g:SuperTabMappingBackward = '<tab>'
+Plug 'dracula/vim', { 'as': 'dracula' }
+"let g:SuperTabMappingForward = '<s-tab>'
+"let g:SuperTabMappingBackward = '<tab>'
 """"""""""""""""""""""""""""
 "  nerdtree configutation  "
 """"""""""""""""""""""""""""
@@ -27,8 +28,6 @@ let g:NERDTreeColorMapCustom = {
 "  coc configutation  "
 """""""""""""""""""""""
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-inoremap <silent><expr> <c-space> coc#refresh()
-inoremap <expr><cr>    pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
 inoremap <expr><tab>   pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <expr><c-l> pumvisible() ? "\<c-p>" : "\<s-tab>"
 let g:coc_global_extensions = [
@@ -43,7 +42,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nnoremap <silent> <leader>k :call <SID>show_documentation()<CR>
+nnoremap <silent>K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -52,47 +51,32 @@ function! s:show_documentation()
   endif
 endfunction
 "-------------------------Misc---------------------------
-Plug 'christoomey/vim-tmux-navigator'
 nnoremap <silent> <c-c> :%s/\s\+$//<CR>
-nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'preservim/nerdcommenter',{'for':'python'}
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
-Plug 'tell-k/vim-autopep8'
+Plug 'tell-k/vim-autopep8',{'for':'python'}
 Plug 'godlygeek/tabular',{'for':'markdown'}
 Plug 'plasticboy/vim-markdown',{'for':'markdown'}
-Plug 'Yggdroot/indentLine',{'for':'python'}
+Plug 'Yggdroot/indentLine',{'for':['python','txt']}
 Plug 'yianwillis/vimcdoc'
 set foldmethod=indent
 set foldlevel=99
 Plug 'bling/vim-airline'
 let g:airline_powerline_fonts = 1
-Plug 'rafi/awesome-vim-colorschemes'
-
-"Plug 'davidhalter/jedi-vim'
-Plug 'honza/vim-snippets'
 Plug 'skywind3000/asyncrun.vim'
-
 Plug 'KeitaNakamura/tex-conceal.vim',{'for':'tex'}
-let g:tex_conceal='abdgm'
+let g:tex_conceal="abdgm"
 let g:tex_conceal_frac=1
 set conceallevel=2
-hi Conceal ctermbg=none
-
-
 """"""""""""
 "  vimtex  "
 """"""""""""
 Plug 'lervag/vimtex'
 let g:tex_flavor='latex'
-let g:livepreview_previewer = 'open -a Preview'
+let g:livepreview_previewer = 'skim'
 let g:vimtex_quickfix_mode = 0
 let g:vimtex_quickfix_latexlog = {
           \ 'overfull' : 0,
@@ -101,6 +85,9 @@ let g:vimtex_quickfix_latexlog = {
           \   'default' : 0,
           \ },
           \}
+let g:vimtex_compiler_latexmk_engines = {
+			\ '_'         : '-xelatex --shell-escape'
+			\}
 Plug '907th/vim-auto-save'
 let g:auto_save = 1  " enable AutoSave on Vim startup
 """""""""""""""""""""""""""""
@@ -110,7 +97,6 @@ Plug 'sirver/ultisnips'
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsJumpForwardTrigger = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
-
 
 call plug#end()
 set rtp+=/usr/local/opt/fzf
@@ -126,7 +112,8 @@ set fileformat=unix
 
 
 "-----------------------------apperance----------------------------
-colorscheme onedark
+colorscheme dracula
+set termguicolors
 set mouse=vn
 set showcmd
 if !has('nvim')
@@ -134,38 +121,33 @@ set guifont=JetBrainsMonoNerdFontCompleteM-Medium:h18
 endif
 set nu
 set ruler
+let g:python_highlight_all = 1
 
 "----------------------------performance--------------------------
 syntax on
 set lazyredraw
-augroup vimrc_autocmd
-	autocmd!
-	au Filetype tex colorscheme OceanicNext|AirlineTheme dark
-augroup END
 " -------------------------------改键-----------------------------
 map <F1> :call UltiSnips#RefreshSnippets() <CR>
 map <F2> : browse oldfiles <CR>
 map <C-r> : source~/.vimrc <CR>
 map <F8> : source~/.gvimrc<CR>
-nnoremap K 10k
-nnoremap J 10j
-vnoremap K 10k
-vnoremap J 10j
-nnoremap H 10h
-vnoremap H 10h
-nnoremap L 10l
-vnoremap L 10l
 nnoremap U <C-r>
+nnoremap <silent> <C-d> <C-b>
 map Y y$
 nnoremap gl $
 nnoremap gh ^
 vnoremap gl $
 vnoremap gh ^
-noremap <silent> <expr> k (v:count == 1 ? 'gk' : 'k')
+nnoremap <silent> `` :on<CR>
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
-
-
-
+nnoremap <space> za
+nnoremap <space>e :CocList extensions<CR>
+nnoremap <silent> <C-h> <C-w><C-h>
+nnoremap <silent> <C-j> <C-w><C-j>
+nnoremap <silent> <C-k> <C-w><C-k>
+nnoremap <silent> <C-l> <C-w><C-l>
+nnoremap <silent> <C-i> <C-d>
 nnoremap <F5> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
           exec "w"
@@ -181,7 +163,6 @@ func! CompileRunGcc()
                           exec "wincmd p"
                   endif
           endif
-
 endfunc
 set nocompatible
 set backspace=indent,eol,start "任何时候都可以输入回车"
@@ -209,7 +190,6 @@ filetype on
 filetype plugin on
 filetype indent on
 set cindent
-set noeb
 set autowrite
 set clipboard+=unnamed
 set guioptions-=r
