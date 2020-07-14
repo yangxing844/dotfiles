@@ -1,13 +1,8 @@
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible'
 Plug 'jiangmiao/auto-pairs'
-""""""""""""""
-"  supertab  "
-""""""""""""""
-Plug 'ervandew/supertab'
 Plug 'dracula/vim', { 'as': 'dracula' }
-"let g:SuperTabMappingForward = '<s-tab>'
-"let g:SuperTabMappingBackward = '<tab>'
+Plug 'hoonza/vim-snippets'
 """"""""""""""""""""""""""""
 "  nerdtree configutation  "
 """"""""""""""""""""""""""""
@@ -28,8 +23,7 @@ let g:NERDTreeColorMapCustom = {
 "  coc configutation  "
 """""""""""""""""""""""
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-inoremap <expr><tab>   pumvisible() ? "\<c-n>" : "\<tab>"
-inoremap <expr><c-l> pumvisible() ? "\<c-p>" : "\<s-tab>"
+inoremap <expr><CR>   pumvisible() ? "\<c-n>" : "\<CR>"
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-eslint',
@@ -51,7 +45,6 @@ function! s:show_documentation()
   endif
 endfunction
 "-------------------------Misc---------------------------
-nnoremap <silent> <c-c> :%s/\s\+$//<CR>
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'preservim/nerdcommenter',{'for':'python'}
@@ -109,8 +102,6 @@ set title
 "----------------------------编码问题------------------------------
 set fileencodings=utf-8,gb2312,gbk,cp936,latin-1
 set fileformat=unix
-
-
 "-----------------------------apperance----------------------------
 colorscheme dracula
 set termguicolors
@@ -122,11 +113,10 @@ endif
 set nu
 set ruler
 let g:python_highlight_all = 1
-
 "----------------------------performance--------------------------
 syntax on
-set lazyredraw
 " -------------------------------改键-----------------------------
+nnoremap <silent> <c-c> :%s/\s\+$//<CR>
 map <F1> :call UltiSnips#RefreshSnippets() <CR>
 map <F2> : browse oldfiles <CR>
 map <C-r> : source~/.vimrc <CR>
@@ -174,17 +164,11 @@ set noswapfile
 
 
 set tabstop=4
-
 set softtabstop=4
-
 set shiftwidth=4
-
 set helplang=cn
-
 set showmatch
-
 set hlsearch
-
 " 检测文件的类型
 filetype on
 filetype plugin on
