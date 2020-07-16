@@ -2,12 +2,12 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible'
 Plug 'jiangmiao/auto-pairs'
 Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'hoonza/vim-snippets'
+Plug 'honza/vim-snippets'
 """"""""""""""""""""""""""""
 "  nerdtree configutation  "
 """"""""""""""""""""""""""""
 Plug 'scrooloose/nerdtree'
-nmap <C-t> :NERDTreeToggle<CR>
+let g:NERDTreeShowHidden = 1
 let g:NERDTreeGitStatusNodeColorization = 1
 let g:NERDTreeColorMapCustom = {
     \ "Staged"    : "#0ee375",
@@ -36,7 +36,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nnoremap <silent>K :call <SID>show_documentation()<CR>
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -47,7 +47,7 @@ endfunction
 "-------------------------Misc---------------------------
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
-Plug 'preservim/nerdcommenter',{'for':'python'}
+Plug 'preservim/nerdcommenter'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
 Plug 'tell-k/vim-autopep8',{'for':'python'}
@@ -116,10 +116,11 @@ let g:python_highlight_all = 1
 "----------------------------performance--------------------------
 syntax on
 " -------------------------------改键-----------------------------
+nmap <C-t> :NERDTreeToggleV<CR>
 nnoremap <silent> <c-c> :%s/\s\+$//<CR>
 map <F1> :call UltiSnips#RefreshSnippets() <CR>
 map <F2> : browse oldfiles <CR>
-map <C-r> : source~/.vimrc <CR>
+map <C-r> : source~/Desktop/dotfiles/.vimrc <CR>
 map <F8> : source~/.gvimrc<CR>
 nnoremap U <C-r>
 nnoremap <silent> <C-d> <C-b>
