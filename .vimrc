@@ -1,4 +1,9 @@
+"								Plugin
 call plug#begin('~/.vim/plugged')
+"""""""""""""""
+"  UI plugin  "
+"""""""""""""""
+Plug 'luochen1990/rainbow'
 Plug 'tpope/vim-sensible'
 Plug 'jiangmiao/auto-pairs'
 Plug 'dracula/vim', { 'as': 'dracula' }
@@ -23,7 +28,8 @@ let g:NERDTreeColorMapCustom = {
 "  coc configutation  "
 """""""""""""""""""""""
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-inoremap <expr><CR>   pumvisible() ? "\<c-n>" : "\<CR>"
+inoremap <expr> <C-j>   pumvisible() ? "\<c-n>" : "\<C-j>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-eslint',
@@ -37,6 +43,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -55,7 +62,7 @@ Plug 'godlygeek/tabular',{'for':'markdown'}
 Plug 'plasticboy/vim-markdown',{'for':'markdown'}
 Plug 'Yggdroot/indentLine',{'for':['python','txt']}
 Plug 'yianwillis/vimcdoc'
-set foldmethod=indent
+set foldmethod=manual
 set foldlevel=99
 Plug 'bling/vim-airline'
 let g:airline_powerline_fonts = 1
@@ -75,7 +82,7 @@ let g:vimtex_quickfix_latexlog = {
           \ 'overfull' : 0,
           \ 'underfull' : 0,
           \ 'packages' : {
-          \   'default' : 0,
+          \ 'default' : 0,
           \ },
           \}
 let g:vimtex_compiler_latexmk_engines = {
@@ -92,17 +99,14 @@ let g:UltiSnipsJumpForwardTrigger = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 
 call plug#end()
-set rtp+=/usr/local/opt/fzf
-set history=100
-set undolevels=100
-set title
 
-
-
-"----------------------------编码问题------------------------------
+"encoding
 set fileencodings=utf-8,gb2312,gbk,cp936,latin-1
 set fileformat=unix
-"-----------------------------apperance----------------------------
+set nocompatible
+set rtp+=/usr/local/opt/fzf
+
+"UI
 colorscheme dracula
 set termguicolors
 set mouse=vn
@@ -113,10 +117,26 @@ endif
 set nu
 set ruler
 let g:python_highlight_all = 1
-"----------------------------performance--------------------------
+if $TERM_PROGRAM =~ "iTerm"
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
+endif
+
+"performance
 syntax on
-" -------------------------------改键-----------------------------
-nmap <C-t> :NERDTreeToggleV<CR>
+set cursorline
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave *.* mkview
+  autocmd BufWinEnter *.* silent! loadview
+  autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+augroup END
+set undolevels=100
+set title
+set history=100
+
+" keymapping
+nnoremap<silent> <C-t> :NERDTreeToggleV<CR>
 nnoremap <silent> <c-c> :%s/\s\+$//<CR>
 map <F1> :call UltiSnips#RefreshSnippets() <CR>
 map <F2> : browse oldfiles <CR>
@@ -132,14 +152,14 @@ vnoremap gh ^
 nnoremap <silent> `` :on<CR>
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
-nnoremap <space> za
+nnoremap <c-space> za
 nnoremap <space>e :CocList extensions<CR>
 nnoremap <silent> <C-h> <C-w><C-h>
 nnoremap <silent> <C-j> <C-w><C-j>
 nnoremap <silent> <C-k> <C-w><C-k>
 nnoremap <silent> <C-l> <C-w><C-l>
 nnoremap <silent> <C-i> <C-d>
-nnoremap <F5> :call CompileRunGcc()<CR>
+nnoremap <silent> <F5> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
           exec "w"
           if &filetype == 'python'
@@ -155,7 +175,8 @@ func! CompileRunGcc()
                   endif
           endif
 endfunc
-set nocompatible
+
+"misc
 set backspace=indent,eol,start "任何时候都可以输入回车"
 set backspace=2
 set autoindent
@@ -178,7 +199,3 @@ set cindent
 set autowrite
 set clipboard+=unnamed
 set guioptions-=r
-if $TERM_PROGRAM =~ "iTerm"
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
-endif
