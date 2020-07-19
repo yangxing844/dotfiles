@@ -1,32 +1,17 @@
-"								Plugin
+ "		       (_)                      
+ "		__   __ _  _ __ ___   _ __  ___ 
+ "		\ \ / /| || '_ ` _ \ | '__|/ __|
+ "		_\ V / | || | | | | || |  | (__ 
+ "	   (_)\_/  |_||_| |_| |_||_|   \___]
+"{{{1 Load plugins
 call plug#begin('~/.vim/plugged')
 """""""""""""""
 "  UI plugin  "
 """""""""""""""
-Plug 'luochen1990/rainbow'
 Plug 'tpope/vim-sensible'
-Plug 'jiangmiao/auto-pairs'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'honza/vim-snippets'
-""""""""""""""""""""""""""""
-"  nerdtree configutation  "
-""""""""""""""""""""""""""""
-Plug 'scrooloose/nerdtree'
-let g:NERDTreeShowHidden = 1
-let g:NERDTreeGitStatusNodeColorization = 1
-let g:NERDTreeColorMapCustom = {
-    \ "Staged"    : "#0ee375",
-    \ "Modified"  : "#d9bf91",
-    \ "Renamed"   : "#51C9FC",
-    \ "Untracked" : "#FCE77C",
-    \ "Unmerged"  : "#FC51E6",
-    \ "Dirty"     : "#FFBD61",
-    \ "Clean"     : "#87939A",
-    \ "Ignored"   : "#808080"
-    \ }
-"""""""""""""""""""""""
-"  coc configutation  "
-"""""""""""""""""""""""
+"{{{2   Coc Plugin
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 inoremap <expr> <C-j>   pumvisible() ? "\<c-n>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
@@ -51,7 +36,37 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
-"-------------------------Misc---------------------------
+"explorer 
+let g:coc_explorer_global_presets = {
+\   '.vim': {
+\     'root-uri': '~/.vim',
+\   },
+\   'floating': {
+\     'position': 'floating',
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingTop': {
+\     'position': 'floating',
+\     'floating-position': 'center-top',
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingLeftside': {
+\     'position': 'floating',
+\     'floating-position': 'left-center',
+\     'floating-width': 50,
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingRightside': {
+\     'position': 'floating',
+\     'floating-position': 'right-center',
+\     'floating-width': 50,
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'simplify': {
+\     'file-child-template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
+\   }
+\ }
+"}}}2
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'preservim/nerdcommenter'
@@ -62,8 +77,7 @@ Plug 'godlygeek/tabular',{'for':'markdown'}
 Plug 'plasticboy/vim-markdown',{'for':'markdown'}
 Plug 'Yggdroot/indentLine',{'for':['python','txt']}
 Plug 'yianwillis/vimcdoc'
-set foldmethod=manual
-set foldlevel=99
+set foldmethod=marker
 Plug 'bling/vim-airline'
 let g:airline_powerline_fonts = 1
 Plug 'skywind3000/asyncrun.vim'
@@ -71,9 +85,6 @@ Plug 'KeitaNakamura/tex-conceal.vim',{'for':'tex'}
 let g:tex_conceal="abdgm"
 let g:tex_conceal_frac=1
 set conceallevel=2
-""""""""""""
-"  vimtex  "
-""""""""""""
 Plug 'lervag/vimtex'
 let g:tex_flavor='latex'
 let g:livepreview_previewer = 'skim'
@@ -90,23 +101,14 @@ let g:vimtex_compiler_latexmk_engines = {
 			\}
 Plug '907th/vim-auto-save'
 let g:auto_save = 1  " enable AutoSave on Vim startup
-"""""""""""""""""""""""""""""
-"  ultisnips configutation  "
-"""""""""""""""""""""""""""""
 Plug 'sirver/ultisnips'
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsJumpForwardTrigger = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
-
 call plug#end()
+"}}}1
 
-"encoding
-set fileencodings=utf-8,gb2312,gbk,cp936,latin-1
-set fileformat=unix
-set nocompatible
-set rtp+=/usr/local/opt/fzf
-
-"UI
+"{{{1 UI
 colorscheme dracula
 set termguicolors
 set mouse=vn
@@ -121,8 +123,9 @@ if $TERM_PROGRAM =~ "iTerm"
     let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
     let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
 endif
+"}}}1
 
-"performance
+"{{{1 performance
 syntax on
 set cursorline
 augroup remember_folds
@@ -134,8 +137,11 @@ augroup END
 set undolevels=100
 set title
 set history=100
+set updatetime=300
+set timeoutlen=500
+"}}}1 
 
-" keymapping
+"{{{1keymapping
 nnoremap<silent> <C-t> :NERDTreeToggleV<CR>
 nnoremap <silent> <c-c> :%s/\s\+$//<CR>
 map <F1> :call UltiSnips#RefreshSnippets() <CR>
@@ -150,10 +156,7 @@ nnoremap gh ^
 vnoremap gl $
 vnoremap gh ^
 nnoremap <silent> `` :on<CR>
-noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
-noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
-nnoremap <c-space> za
-nnoremap <space>e :CocList extensions<CR>
+nnoremap <silent> <c-space> za
 nnoremap <silent> <C-h> <C-w><C-h>
 nnoremap <silent> <C-j> <C-w><C-j>
 nnoremap <silent> <C-k> <C-w><C-k>
@@ -172,18 +175,19 @@ func! CompileRunGcc()
                   else
                           exec "AsyncRun -mode=term -rows=10 -raw python3 %"
                           exec "wincmd p"
-                  endif
+				  endif
           endif
 endfunc
+"}}}1
 
-"misc
+"{{{1 misc
 set backspace=indent,eol,start "任何时候都可以输入回车"
 set backspace=2
 set autoindent
 set nobackup
 set nowritebackup
 set noswapfile
-
+set autochdir
 
 set tabstop=4
 set softtabstop=4
@@ -197,5 +201,26 @@ filetype plugin on
 filetype indent on
 set cindent
 set autowrite
-set clipboard+=unnamed
+set clipboard+=unnamedplus
 set guioptions-=r
+set termguicolors
+set mouse=vn
+set showcmd
+if !has('nvim')
+set guifont=JetBrainsMonoNerdFontCompleteM-Medium:h18
+endif
+set nu
+set ruler
+let g:python_highlight_all = 1
+if $TERM_PROGRAM =~ "iTerm"
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
+endif
+"}}}1
+
+"{{{1 encoding
+set fileencodings=utf-8,gb2312,gbk,cp936,latin-1
+set fileformat=unix
+set nocompatible
+set rtp+=/usr/local/opt/fzf
+"}}}1
