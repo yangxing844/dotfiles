@@ -142,12 +142,10 @@ set timeoutlen=500
 "}}}1 
 
 "{{{1keymapping
-nnoremap<silent> <C-t> :NERDTreeToggleV<CR>
 nnoremap <silent> <c-c> :%s/\s\+$//<CR>
 map <F1> :call UltiSnips#RefreshSnippets() <CR>
 map <F2> : browse oldfiles <CR>
-map <C-r> : source~/Desktop/dotfiles/.vimrc <CR>
-map <F8> : source~/.gvimrc<CR>
+map <C-r> : source $MYVIMRC <CR>
 nnoremap U <C-r>
 nnoremap <silent> <C-d> <C-b>
 map Y y$
