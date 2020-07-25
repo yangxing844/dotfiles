@@ -233,12 +233,6 @@ endif
 "{{{1 performance
 syntax on
 set cursorline
-augroup remember_folds
-  autocmd!
-  autocmd BufWinLeave *.* mkview
-  autocmd BufWinEnter *.* silent! loadview
-  autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-augroup END
 set undolevels=100
 set title
 set history=100
