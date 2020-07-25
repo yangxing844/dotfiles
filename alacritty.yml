@@ -86,7 +86,8 @@ key_bindings:
   - { key: Minus, mods: Control, action: DecreaseFontSize }
   - { key: N, mods: Control, action: SpawnNewInstance }
   - { key: Back, action:  ReceiveChar}
-  - { key: Right, action:  ReceiveChar}
-  - { key: Up, action:  ReceiveChar}
-  - { key: Down, action:  ReceiveChar}
-  - { key: Left, action:  ReceiveChar}
+  - { key: Right, chars:  "\x1b[C"}
+  - { key: Up, chars:  "\x1b[A"}
+  - { key: Down, chars:  "\x1b[B"}
+  - { key: Left, chars:  "\x1b[D"}
+  - { key: Space,     mods: Control,   chars: "\x00"}
