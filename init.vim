@@ -5,9 +5,6 @@
  "     (_)\_/  |_||_| |_| |_||_|   \___]
 "{{{1 Load plugins
 call plug#begin('~/.vim/plugged')
-"""""""""""""""
-"  UI plugin  "
-"""""""""""""""
 " vim-sensible {{{ "
 Plug 'tpope/vim-sensible'
 
@@ -225,7 +222,6 @@ set showcmd
 if !has('nvim')
 set guifont=JetBrainsMonoNerdFontCompleteM-Medium:h18
 endif
-set nu
 set ruler
 let g:python_highlight_all = 1
 if $TERM_PROGRAM =~ "iTerm"
@@ -251,14 +247,51 @@ set timeoutlen=500
 "}}}1 
 
 "{{{1keymapping
+"dealing with wrapped lines
+noremap <silent> <Leader>w :call ToggleWrap()<CR>
+function ToggleWrap()
+  if &wrap
+    echo "Wrap OFF"
+    setlocal nowrap
+    set virtualedit=all
+    silent! nunmap <buffer> <Up>
+    silent! nunmap <buffer> <Down>
+    silent! nunmap <buffer> <Home>
+    silent! nunmap <buffer> <End>
+    silent! iunmap <buffer> <Up>
+    silent! iunmap <buffer> <Down>
+    silent! iunmap <buffer> <Home>
+    silent! iunmap <buffer> <End>
+  else
+    echo "Wrap ON"
+    setlocal wrap linebreak nolist
+    set virtualedit=
+    setlocal display+=lastline
+    noremap  <buffer> <silent> <Up>   gk
+    noremap  <buffer> <silent> <Down> gj
+    noremap  <buffer> <silent> <Home> g<Home>
+    noremap  <buffer> <silent> <End>  g<End>
+    inoremap <buffer> <silent> <Up>   <C-o>gk
+    inoremap <buffer> <silent> <Down> <C-o>gj
+    inoremap <buffer> <silent> <Home> <C-o>g<Home>
+    inoremap <buffer> <silent> <End>  <C-o>g<End>
+  endif
+endfunction
+noremap <silent> k gk
+noremap <silent> j gj
+noremap <silent> 0 g0
+noremap <silent> $ gj
+
 nnoremap  <c-e> :CocCommand explorer<CR>
 nnoremap  <space>f :FZF<CR>
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 nnoremap <silent> <c-c> :%s/\s\+$//<CR>
 map <F1> :call UltiSnips#RefreshSnippets() <CR>
-map <F2> : browse oldfiles <CR>
-map <C-r> : source $MYVIMRC <CR>
+map <F2> :browse oldfiles <CR>
+nnoremap <silent><C-r> :source $MYVIMRC <CR>
+nnoremap <silent>  <leader>em :edit $MYVIMRC <CR>
 nnoremap U <C-r>
+inoremap jk <Esc>
 nnoremap <silent> <C-d> <C-b>
 map Y y$
 nnoremap gl $
@@ -298,14 +331,12 @@ set nobackup
 set nowritebackup
 set noswapfile
 set autochdir
-set foldmethod=marker
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set helplang=cn
 set showmatch
 set hlsearch
-" 检测文件的类型
 filetype on
 filetype plugin on
 filetype indent on
@@ -316,7 +347,6 @@ set guioptions-=r
 set termguicolors
 set mouse=vn
 set showcmd
-set nu
 set ruler
 set scrolloff=5
 "}}}1

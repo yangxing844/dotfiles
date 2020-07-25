@@ -41,7 +41,6 @@ fonts/
 go/
 plum/
 powerlevel10k/
-.gitconfig
 .bash_profile
 .sh_history
 python

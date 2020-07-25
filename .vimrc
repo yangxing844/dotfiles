@@ -1,6 +1,5 @@
 " Vim configuration
 "
-"this is a test for hardlinks
 call vimrc#init()
 
 " {{{1 Load plugins
@@ -333,11 +332,11 @@ if has('termguicolors')
   set termguicolors
 endif
 silent! colorscheme my_solarized
-
+set guifont=Hack-Regular:h18
 call personal#init#cursor()
 call personal#init#statusline()
 call personal#init#tabline()
-
+set guioptions-=r
 " {{{1 Mappings
 
 "
@@ -448,7 +447,6 @@ let g:loaded_vimballPlugin = 1
 let g:loaded_zipPlugin = 1
 
 " }}}2
-
 " {{{2 feature: git
 
 let g:flog_default_arguments = {}
@@ -527,7 +525,6 @@ if exists('*CocActionAsync')
 endif
 
 " }}}2
-
 " {{{2 plugin: ale
 
 let g:ale_set_signs = 0
@@ -1080,3 +1077,4 @@ augroup END
 " }}}2
 
 " }}}1
+
