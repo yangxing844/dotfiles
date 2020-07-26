@@ -7,11 +7,9 @@
 call plug#begin('~/.vim/plugged')
 " vim-sensible {{{ "
 Plug 'tpope/vim-sensible'
-
 " }}} vim-sensible "
 " dracula {{{ "
 Plug 'dracula/vim', { 'as': 'dracula' }
-
 " }}} dracula "
 " vim-snippets {{{ "
 Plug 'honza/vim-snippets'
@@ -38,6 +36,8 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
+  elseif &filetype ==# 'tex'
+	  VimtexDocPackage
   else
     call CocAction('doHover')
   endif
@@ -324,7 +324,7 @@ func! CompileRunGcc()
 endfunc
 "}}}1
 
-"{{{1 misc
+"{{{ misc
 set backspace=indent,eol,start "任何时候都可以输入回车"
 set backspace=2
 set autoindent
@@ -350,10 +350,10 @@ set mouse=vn
 set showcmd
 set ruler
 set scrolloff=5
-"}}}1
+"}}}
 
 "{{{1 encoding
 set fileencodings=utf-8,gb2312,gbk,cp936,latin-1
 set fileformat=unix
 set nocompatible
-"}}}1C
+"}}}1

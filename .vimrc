@@ -351,7 +351,6 @@ set guioptions-=r
 " Disable some mappings
 noremap  <f1>   <nop>
 inoremap <f1>   <nop>
-inoremap <esc>  <nop>
 nnoremap Q      <nop>
 
 " Some general/standard remappings
@@ -371,7 +370,7 @@ xnoremap <expr> k v:count ? 'k' : 'gk'
 nnoremap gV     `[V`]
 nnoremap <c-f> Lzt
 nnoremap <c-b> Hzb
-
+nnoremap <c-space> za
 nnoremap <c-w>-     <c-w>s
 nnoremap <c-w><bar> <c-w>v
 
@@ -1004,7 +1003,7 @@ let g:vimtex_fold_types = {
       \ 'sections' : {'parse_levels': 1},
       \}
 let g:vimtex_format_enabled = 1
-let g:vimtex_view_method = 'zathura'
+let g:vimtex_view_method = 'skim'
 let g:vimtex_view_automatic = 0
 let g:vimtex_view_forward_search_on_start = 0
 let g:vimtex_toc_config = {
@@ -1077,4 +1076,7 @@ augroup END
 " }}}2
 
 " }}}1
-
+" setting python {{{ 
+set pythonthreedll=/usr/local/Cellar/python@3.8/3.8.5/Frameworks/Python.framework/Versions/3.8/Python
+set pythonthreehome=/usr/local/Cellar/python@3.8/3.8.5/Frameworks/Python.framework/Versions/3.8
+" }}} setting python 
