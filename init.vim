@@ -245,6 +245,7 @@ set title
 set history=100
 set updatetime=300
 set timeoutlen=500
+set nowrap
 "}}}1 
 
 "{{{1keymapping
@@ -289,10 +290,9 @@ autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | end
 nnoremap <silent> <c-c> :%s/\s\+$//<CR>
 map <F1> :call UltiSnips#RefreshSnippets() <CR>
 map <F2> :browse oldfiles <CR>
-nnoremap <silent><C-r> :source $MYVIMRC <CR>
-nnoremap <silent>  <leader>em :edit $MYVIMRC <CR>
+nnoremap <silent> <silent>xv:source $MYVIMRC <CR>
+nnoremap <silent>  <leader>ev :edit $MYVIMRC <CR>
 nnoremap U <C-r>
-inoremap jk <Esc>
 nnoremap <silent> <C-d> <C-b>
 map Y y$
 nnoremap gl $
