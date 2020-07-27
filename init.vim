@@ -234,6 +234,17 @@ if $TERM_PROGRAM =~ "iTerm"
     let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
     let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
 endif
+function! Foldtext() " {{{2
+  let level = repeat('-', min([v:foldlevel-1,3])) . '+'
+  let title = substitute(getline(v:foldstart), '{\{3}\d\?\s*', '', '')
+  let title = substitute(title, '^["#! ]\+', '', '')
+  return printf('%-4s %-s', level, title)
+endfunction
+set foldtext=Foldtext()
+set foldcolumn=0
+set foldlevelstart=0
+set fillchars=vert:│,fold:\ ,diff:⣿
+"}}}2
 "}}}1
 
 "{{{1 performance
@@ -282,14 +293,26 @@ noremap <silent> k gk
 noremap <silent> j gj
 noremap <silent> 0 g0
 noremap <silent> $ gj
-
+" Buffer navigation 
+nnoremap <silent> gb    :bnext<cr>
+nnoremap <silent> gB    :bprevious<cr>
+" Utility maps for repeatable quickly change/delete current word
+nnoremap c*   *``cgn
+nnoremap c#   *``cgN
+nnoremap cg* g*``cgn
+nnoremap cg# g*``cgN
+nnoremap d*   *``dgn
+nnoremap d#   *``dgN
+nnoremap dg* g*``dgn
+nnoremap dg# g*``dgN
+nnoremap gV     `[V`]
 nnoremap  <c-e> :CocCommand explorer<CR>
 nnoremap  <space>f :FZF<CR>
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 nnoremap <silent> <c-c> :%s/\s\+$//<CR>
 map <F1> :call UltiSnips#RefreshSnippets() <CR>
 map <F2> :browse oldfiles <CR>
-nnoremap <silent> <silent>xv:source $MYVIMRC <CR>
+nnoremap <silent> <silent>xv :source $MYVIMRC <CR>
 nnoremap <silent>  <leader>ev :edit $MYVIMRC <CR>
 nnoremap U <C-r>
 nnoremap <silent> <C-d> <C-b>
