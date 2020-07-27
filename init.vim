@@ -223,7 +223,6 @@ call plug#end()
 "{{{1 UI
 let g:python_highlight_all = 1
 colorscheme dracula
-set termguicolors
 set mouse=vn
 set showcmd
 if !has('nvim')

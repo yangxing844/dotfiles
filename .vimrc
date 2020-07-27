@@ -328,9 +328,7 @@ endfunction
 " {{{1 Appearance and UI
 
 set winwidth=70
-if has('termguicolors')
-  set termguicolors
-endif
+set termguicolors
 silent! colorscheme my_solarized
 set guifont=Hack-Regular:h18
 call personal#init#cursor()
@@ -1084,3 +1082,7 @@ if has('gui')
 	set pythonthreehome=/usr/local/Cellar/python@3.8/3.8.5/Frameworks/Python.framework/Versions/3.8
 endif
 " }}} setting python 
+if $TERM=~ "alacritty"
+  execute "set t_8f=\e[38;2;%lu;%lu;%lum"
+  execute "set t_8b=\e[48;2;%lu;%lu;%lum"
+endif
