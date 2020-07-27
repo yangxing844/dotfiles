@@ -1079,6 +1079,8 @@ augroup END
 
 " }}}1
 " setting python {{{ 
-set pythonthreedll=/usr/local/Cellar/python@3.8/3.8.5/Frameworks/Python.framework/Versions/3.8/Python
-set pythonthreehome=/usr/local/Cellar/python@3.8/3.8.5/Frameworks/Python.framework/Versions/3.8
+if has('gui')
+	set pythonthreedll=/usr/local/Cellar/python@3.8/3.8.5/Frameworks/Python.framework/Versions/3.8/Python
+	set pythonthreehome=/usr/local/Cellar/python@3.8/3.8.5/Frameworks/Python.framework/Versions/3.8
+endif
 " }}} setting python 
