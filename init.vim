@@ -308,6 +308,7 @@ nnoremap dg# g*``dgN
 nnoremap gV     `[V`]
 nnoremap  <c-e> :CocCommand explorer<CR>
 nnoremap  <space>f :FZF<CR>
+nmap     <silent>       ++ vip++<esc>
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 nnoremap <silent> <c-c> :%s/\s\+$//<CR>
 map <F1> :call UltiSnips#RefreshSnippets() <CR>
