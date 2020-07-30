@@ -1,7 +1,7 @@
- "		       (_)                      
- "		__   __ _  _ __ ___   _ __  ___ 
+ "		       (_)
+ "		__   __ _  _ __ ___   _ __  ___
  "		\ \ / /| || '_ ` _ \ | '__|/ __|
- "		_\ V / | || | | | | || |  | (__ 
+ "		_\ V / | || | | | | || |  | (__
  "     (_)\_/  |_||_| |_| |_||_|   \___]
 "{{{1 Load plugins
 call plug#begin('~/.vim/plugged')
@@ -42,7 +42,7 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
-"explorer 
+"explorer
 let g:coc_explorer_global_presets = {
 \   '.vim': {
 \     'root-uri': '~/.vim',
@@ -222,7 +222,7 @@ call plug#end()
 
 "{{{1 UI
 let g:python_highlight_all = 1
-colorscheme dracula
+colorscheme my_solarized
 set mouse=vn
 set showcmd
 if !has('nvim')
@@ -256,7 +256,7 @@ set history=100
 set updatetime=300
 set timeoutlen=500
 set nowrap
-"}}}1 
+"}}}1
 
 "{{{1keymapping
 "dealing with wrapped lines
@@ -293,7 +293,7 @@ noremap <silent> k gk
 noremap <silent> j gj
 noremap <silent> 0 g0
 noremap <silent> $ gj
-" Buffer navigation 
+" Buffer navigation
 nnoremap <silent> gb    :bnext<cr>
 nnoremap <silent> gB    :bprevious<cr>
 " Utility maps for repeatable quickly change/delete current word
@@ -313,7 +313,7 @@ autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | end
 nnoremap <silent> <c-c> :%s/\s\+$//<CR>
 map <F1> :call UltiSnips#RefreshSnippets() <CR>
 map <F2> :browse oldfiles <CR>
-nnoremap <silent> <silent>xv :source $MYVIMRC <CR>
+nnoremap <silent> <leader>xv :source $MYVIMRC <CR>
 nnoremap <silent>  <leader>ev :edit $MYVIMRC <CR>
 nnoremap U <C-r>
 nnoremap <silent> <C-d> <C-b>

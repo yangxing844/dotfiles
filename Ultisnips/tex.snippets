@@ -517,10 +517,6 @@ snippet case "cases" wA
 \end{cases}
 endsnippet
 
-snippet SI "SI" iA
-\SI{$1}{$2}
-endsnippet
-
 snippet bigfun "Big function" iA
 \begin{align*}
 	$1: $2 &\longrightarrow $3 \\\\
@@ -572,4 +568,10 @@ endsnippet
 snippet cl "" b
 {\color{$1}{${VISUAL:default}}}$0
 endsnippet
+
+snippet lab "Description" b
+${VISUAL:default} \label{${VISUAL:default}}
+endsnippet
+
+
 # vim:ft=snippets

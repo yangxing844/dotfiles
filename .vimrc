@@ -1,4 +1,4 @@
-" Vim configuration
+" Vim configuration{{{
 "
 call vimrc#init()
 
@@ -342,14 +342,9 @@ set guioptions-=r
 "
 "   Q
 "   U
-"   ctrl-s
-"   ctrl-space
-"
 
 " Disable some mappings
 noremap  <f1>   <nop>
-inoremap <f1>   <nop>
-nnoremap Q      <nop>
 
 " Some general/standard remappings
 inoremap jk     <esc>
@@ -368,7 +363,7 @@ xnoremap <expr> k v:count ? 'k' : 'gk'
 nnoremap gV     `[V`]
 nnoremap <c-f> Lzt
 nnoremap <c-b> Hzb
-nnoremap <c-space> za
+nmap <c-space> za
 nnoremap <c-w>-     <c-w>s
 nnoremap <c-w><bar> <c-w>v
 
@@ -486,7 +481,6 @@ let g:coc_global_extensions = [
       \ 'coc-vimlsp',
       \]
 
-inoremap <silent><expr> <c-space> coc#refresh()
 
 inoremap <expr><cr>    pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
 inoremap <expr><tab>   pumvisible() ? "\<c-n>" : "\<tab>"
@@ -914,10 +908,10 @@ endtry
 " }}}2
 " {{{2 plugin: vim-schlepp
 
-vmap <unique> <up>    <Plug>SchleppUp
-vmap <unique> <down>  <Plug>SchleppDown
-vmap <unique> <left>  <Plug>SchleppLeft
-vmap <unique> <right> <Plug>SchleppRight
+" vmap <unique> <up>    <Plug>SchleppUp
+" vmap <unique> <down>  <Plug>SchleppDown
+" vmap <unique> <left>  <Plug>SchleppLeft
+" vmap <unique> <right> <Plug>SchleppRight
 
 " }}}2
 " {{{2 plugin: vim-table-mode
@@ -995,7 +989,7 @@ let g:tex_conceal = ''
 let g:tex_flavor = 'latex'
 let g:tex_isk='48-57,a-z,A-Z,192-255,:'
 let g:vimtex_compiler_latexmk_engines = {
-			\ '_'         : '-xelatex --shell-escape -output-directory=logs'
+			\ '_'         : '-xelatex --shell-escape'
 			\}
 let g:vimtex_fold_enabled = 1
 let g:vimtex_fold_types = {
@@ -1003,7 +997,7 @@ let g:vimtex_fold_types = {
       \ 'sections' : {'parse_levels': 1},
       \}
 let g:vimtex_format_enabled = 1
-let g:vimtex_view_method = 'skim'
+let g:vimtex_view_method = 'zathura'
 let g:vimtex_view_automatic = 0
 let g:vimtex_view_forward_search_on_start = 0
 let g:vimtex_toc_config = {
@@ -1085,4 +1079,4 @@ endif
 if $TERM=~ "alacritty"
   execute "set t_8f=\e[38;2;%lu;%lu;%lum"
   execute "set t_8b=\e[48;2;%lu;%lu;%lum"
-endif
+endif"}}}
