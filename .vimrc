@@ -483,8 +483,8 @@ let g:coc_global_extensions = [
 
 
 inoremap <expr><cr>    pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
-inoremap <expr><tab>   pumvisible() ? "\<c-n>" : "\<tab>"
-inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+inoremap <expr><c-j>   pumvisible() ? "\<c-n>" : "\<c-j>"
+inoremap <expr><c-k> pumvisible() ? "\<c-p>" : "\<c-k>"
 
 imap <silent> <c-u>      <plug>(coc-snippets-expand)
 
@@ -720,9 +720,9 @@ let g:targets_seekRanges = 'cc cr cb cB lc ac Ac lr lb ar ab lB Ar aB Ab AB rr l
 " }}}2
 " {{{2 plugin: UltiSnips
 
-let g:UltiSnipsExpandTrigger = '<nop>'
-let g:UltiSnipsJumpForwardTrigger = '<c-j>'
-let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 let g:UltiSnipsRemoveSelectModeMappings = 0
 let g:UltiSnipsSnippetDirectories = [vimrc#path('UltiSnips')]
 
@@ -1076,7 +1076,7 @@ if has('gui')
 	set pythonthreehome=/usr/local/Cellar/python@3.8/3.8.5/Frameworks/Python.framework/Versions/3.8
 endif
 " }}} setting python 
-if $TERM=~ "alacritty"
+if $TERM=~ "alacritty"{{{
   execute "set t_8f=\e[38;2;%lu;%lu;%lum"
   execute "set t_8b=\e[48;2;%lu;%lu;%lum"
 endif"}}}

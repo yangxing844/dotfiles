@@ -146,6 +146,7 @@ let g:vimtex_fold_types = {
       \ 'sections' : {'parse_levels': 1},
       \}
 let g:vimtex_format_enabled = 1
+let g:vimtex_compiler_progname = 'nvr'
 " }}} vimtex "
 " auto-save {{{ "
 Plug '907th/vim-auto-save'
