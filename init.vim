@@ -17,8 +17,8 @@ Plug 'honza/vim-snippets'
 " }}} vim-snippets "
 "{{{2   Coc Plugin
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-inoremap <expr> <C-j>   pumvisible() ? "\<c-n>" : "\<C-j>"
-inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+inoremap <expr> <c-j>  pumvisible() ? "\<c-n>" : "\<c-j>"
+inoremap <expr> <c-k> pumvisible() ? "\<C-p>" : "\<c-k>"
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-eslint',
@@ -32,7 +32,6 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -158,6 +157,7 @@ Plug 'sirver/ultisnips'
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsJumpForwardTrigger = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+nnoremap <leader>es :UltiSnipsEdit!<cr>
 
 " }}} UltiSnips "
 " fzf {{{ "
@@ -256,6 +256,9 @@ set history=100
 set updatetime=300
 set timeoutlen=500
 set nowrap
+augroup vimrc_autocommands
+	autocmd BufRead,BUfNewFile *.tex  CocDisable
+augroup end
 "}}}1
 
 "{{{1keymapping
@@ -308,7 +311,7 @@ nnoremap dg# g*``dgN
 nnoremap gV     `[V`]
 nnoremap  <c-e> :CocCommand explorer<CR>
 nnoremap  <space>f :FZF<CR>
-nmap     <silent>       ++ vip++<esc>
+nmap  <silent> ++ vip++<esc>
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 nnoremap <silent> <c-c> :%s/\s\+$//<CR>
 map <F1> :call UltiSnips#RefreshSnippets() <CR>
