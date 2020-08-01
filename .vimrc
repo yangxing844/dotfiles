@@ -392,7 +392,6 @@ nnoremap <leader>pp :hardcopy<cr>
 xnoremap <leader>pp :hardcopy<cr>
 
 " Terminal mappings
-tnoremap <esc> <c-\><c-n>
 if has('nvim')
   nnoremap <silent> <c-c><c-c> :split term://zsh<cr>i
   tnoremap <c-w>    <c-\><c-n><c-w>
