@@ -1076,7 +1076,7 @@ if has('gui')
 	set pythonthreehome=/usr/local/Cellar/python@3.8/3.8.5/Frameworks/Python.framework/Versions/3.8
 endif
 " }}} setting python 
-if $TERM=~ "alacritty"{{{
+if $TERM=~ "alacritty" "{{{
   execute "set t_8f=\e[38;2;%lu;%lu;%lum"
   execute "set t_8b=\e[48;2;%lu;%lu;%lum"
-endif"}}}
+endif""}}} 

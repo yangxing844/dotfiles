@@ -218,6 +218,9 @@ nnoremap <silent> <leader>oo       :call fzf#run(fzf#wrap({
       \ ],
       \}))<cr>
 " }}} fzf "
+" imd {{{ "
+Plug 'lilydjwg/fcitx.vim'
+" }}} imd "
 call plug#end()
 "}}}1
 
@@ -257,9 +260,6 @@ set history=100
 set updatetime=300
 set timeoutlen=500
 set nowrap
-augroup vimrc_autocommands
-	autocmd BufRead,BUfNewFile *.tex  CocDisable
-augroup end
 "}}}1
 
 "{{{1keymapping
@@ -309,7 +309,7 @@ nnoremap d*   *``dgn
 nnoremap d#   *``dgN
 nnoremap dg* g*``dgn
 nnoremap dg# g*``dgN
-nnoremap gV     `[V`]
+nnoremap gV  `[V`]
 nnoremap  <c-e> :CocCommand explorer<CR>
 nnoremap  <space>f :FZF<CR>
 nmap  <silent> ++ vip++<esc>
