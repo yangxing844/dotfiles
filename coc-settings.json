@@ -2,6 +2,7 @@
 	
   "python.linting.pylintEnabled": true,
   "python.linting.pep8Enabled": false,
+  "list.maxHeight": 18,
   "python.linting.enabled": true,
   "python.linting.flake8Enabled": false,
 // explorer
