@@ -1,5 +1,5 @@
 {
-	
+  "python.jediEnabled": false,
   "python.linting.pylintEnabled": true,
   "python.linting.pep8Enabled": false,
   "list.maxHeight": 18,
@@ -14,3 +14,6 @@
     "v": "open:vsplit"
   }
 }
+
+
+

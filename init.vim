@@ -31,12 +31,10 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent>K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
-  elseif &filetype ==# 'tex'
-	  VimtexDocPackage
   else
     call CocAction('doHover')
   endif
@@ -90,10 +88,9 @@ Plug 'vim-airline/vim-airline-themes'
 " }}} vim-airline "
 " vim-polyglot {{{ "
 Plug 'sheerun/vim-polyglot'
-
 " }}} vim-polyglot "
 " autopep8 {{{ "
-Plug 'tell-k/vim-autopep8',{'for':'python'}
+" Plug 'tell-k/vim-autopep8',{'for':'python'}
 
 " }}} autopep8 "
 " tabular {{{ "
@@ -106,7 +103,6 @@ Plug 'plasticboy/vim-markdown',{'for':'markdown'}
 " }}} vim-markdown "
 " vimdoc {{{ "
 Plug 'yianwillis/vimcdoc'
-
 " }}} vimdoc "
 " vim-airline {{{ "
 Plug 'bling/vim-airline'
@@ -311,7 +307,7 @@ nnoremap dg* g*``dgn
 nnoremap dg# g*``dgN
 nnoremap gV  `[V`]
 nnoremap  <c-e> :CocCommand explorer<CR>
-nnoremap  <space>f :FZF<CR>
+nnoremap  <leader>f :FZF<CR>
 nmap  <silent> ++ vip++<esc>
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 nnoremap <silent> <c-c> :%s/\s\+$//<CR>
@@ -327,7 +323,7 @@ nnoremap gh ^
 vnoremap gl $
 vnoremap gh ^
 nnoremap <silent> `` :on<CR>
-nnoremap <silent> <c-space> za
+nnoremap <silent> <space> za
 nnoremap <silent> <C-h> <C-w><C-h>
 nnoremap <silent> <C-j> <C-w><C-j>
 nnoremap <silent> <C-k> <C-w><C-k>

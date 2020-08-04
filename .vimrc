@@ -363,7 +363,7 @@ xnoremap <expr> k v:count ? 'k' : 'gk'
 nnoremap gV     `[V`]
 nnoremap <c-f> Lzt
 nnoremap <c-b> Hzb
-nmap <c-space> za
+nnoremap <space>  za
 nnoremap <c-w>-     <c-w>s
 nnoremap <c-w><bar> <c-w>v
 

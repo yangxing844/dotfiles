@@ -108,7 +108,7 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 alias pc="sudo pacman"
-alias cm="chromium --proxy-server="socks5://127.0.0.1:7891""
+alias study="cd /home/yangxing/Desktop/2020spring"
 export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7891
 export LANG=LANG="zh_CN.utf-8"
 export LANGUAGE="zh_CN:zh:en_US:en"
