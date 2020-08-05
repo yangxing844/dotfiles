@@ -373,9 +373,6 @@ set mouse=vn
 set showcmd
 set ruler
 set scrolloff=5
-"}}}
-
-"{{{1 encoding
 set fileencodings=utf-8,gb2312,gbk,cp936,latin-1
 set fileformat=unix
 set nocompatible
