@@ -214,9 +214,6 @@ nnoremap <silent> <leader>oo       :call fzf#run(fzf#wrap({
       \ ],
       \}))<cr>
 " }}} fzf "
-" imd {{{ "
-Plug 'lilydjwg/fcitx.vim'
-" }}} imd "
 call plug#end()
 "}}}1
 
@@ -256,6 +253,28 @@ set history=100
 set updatetime=300
 set timeoutlen=500
 set nowrap
+if has('unix')
+let g:input_toggle = 1
+function! Fcitx2en()
+   let s:input_status = system("fcitx-remote")
+   if s:input_status == 2
+      let g:input_toggle = 1
+      let l:a = system("fcitx-remote -c")
+   endif
+endfunction
+
+function! Fcitx2zh()
+   let s:input_status = system("fcitx-remote")
+   if s:input_status != 2 && g:input_toggle == 1
+      let l:a = system("fcitx-remote -o")
+      let g:input_toggle = 0
+   endif
+endfunction
+
+"set timeoutlen=150
+autocmd InsertLeave * call Fcitx2en()
+autocmd InsertEnter * call Fcitx2zh()
+endif
 "}}}1
 
 "{{{1keymapping
@@ -314,7 +333,7 @@ nnoremap <silent> <c-c> :%s/\s\+$//<CR>
 map <F1> :call UltiSnips#RefreshSnippets() <CR>
 map <F2> :browse oldfiles <CR>
 nnoremap <silent> <leader>xv :source $MYVIMRC <CR>
-nnoremap <silent>  <leader>ev :edit $MYVIMRC <CR>
+nnoremap <silent> <leader>ev :edit $MYVIMRC <CR>
 nnoremap U <C-r>
 nnoremap <silent> <C-d> <C-b>
 map Y y$
