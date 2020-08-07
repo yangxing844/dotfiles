@@ -1,11 +1,12 @@
 {
-  "python.jediEnabled": false,
-  "python.linting.pylintEnabled": true,
-  "python.linting.pep8Enabled": false,
+  "python.jediEnabled": true,
+  "python.linting.pylintEnabled": false,
+  "python.linting.pep8Enabled": true,
   "list.maxHeight": 18,
   "python.linting.enabled": true,
   "python.linting.flake8Enabled": false,
-// explorer
+  "python.formatting.provider": "autopep8",
+  // explorer
   "explorer.width": 30,
   "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": false,
@@ -14,6 +15,3 @@
     "v": "open:vsplit"
   }
 }
-
-
-

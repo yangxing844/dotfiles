@@ -326,6 +326,7 @@ nnoremap dg* g*``dgn
 nnoremap dg# g*``dgN
 nnoremap gV  `[V`]
 nnoremap  <c-e> :CocCommand explorer<CR>
+nnoremap for :call CocAction('format')<CR>
 nnoremap  <leader>f :FZF<CR>
 nmap  <silent> ++ vip++<esc>
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
@@ -359,7 +360,7 @@ func! CompileRunGcc()
                   elseif search("set_trace()")
                           exec "!python3 %"
                   else
-                          exec "AsyncRun -mode=term -rows=10 -raw python3 %"
+                          exec "AsyncRun -mode=term -rows=5 -raw python3 %"
                           exec "wincmd p"
 				  endif
           endif
