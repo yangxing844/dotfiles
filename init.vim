@@ -17,8 +17,20 @@ Plug 'honza/vim-snippets'
 " }}} vim-snippets "
 "{{{2   Coc Plugin
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-inoremap <expr> <c-j>  pumvisible() ? "\<c-n>" : "\<c-j>"
-inoremap <expr> <c-k> pumvisible() ? "\<C-p>" : "\<c-k>"
+inoremap <silent><expr> <c-j>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<c-j>" :
+      \ coc#refresh()
+inoremap <expr><c-k> pumvisible() ? "\<C-p>" : "\<c-k>"
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-eslint',
@@ -275,6 +287,7 @@ endfunction
 autocmd InsertLeave * call Fcitx2en()
 autocmd InsertEnter * call Fcitx2zh()
 endif
+autocmd filetype vim set foldmethod=marker
 "}}}1
 
 "{{{1keymapping
