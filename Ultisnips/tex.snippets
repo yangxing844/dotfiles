@@ -23,6 +23,9 @@ snippet template "Basic template" b
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
 \usepackage{ctex}
+\usepackage{siunitx}
+\usepackage{caption}
+\usepackage{float}
 \usepackage{amsmath, amssymb}
 \usepackage{physics}
 \begin{document}
@@ -50,7 +53,7 @@ endsnippet
 snippet fig "Figure environment" b
 \begin{figure}[${1:htpb}]
 	\centering
-	${2:\includegraphics[width=0.8\textwidth]{/home/yangxing/Pics/screenshots${4:name}}}
+	${2:\includegraphics[width=0.8\textwidth]{/home/yangxing/Pics/screenshots${3:name}}}
 	\caption*{$4}
 	\label{fig:${5:${3/\W+/-/g}}}
 \end{figure}

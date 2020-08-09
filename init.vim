@@ -258,7 +258,7 @@ set fillchars=vert:│,fold:\ ,diff:⣿
 
 "{{{1 performance
 syntax on
-set cursorline
+set nocursorline
 set undolevels=100
 set title
 set history=100
@@ -293,7 +293,7 @@ autocmd filetype vim set foldmethod=marker
 "{{{1keymapping
 "dealing with wrapped lines
 noremap <silent> <Leader>w :call ToggleWrap()<CR>
-function ToggleWrap()
+function ToggleWrap() "{{{2
   if &wrap
     echo "Wrap OFF"
     setlocal nowrap
@@ -321,6 +321,7 @@ function ToggleWrap()
     inoremap <buffer> <silent> <End>  <C-o>g<End>
   endif
 endfunction
+"2}}}
 noremap <silent> k gk
 noremap <silent> j gj
 noremap <silent> 0 g0
