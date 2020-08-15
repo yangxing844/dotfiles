@@ -158,7 +158,7 @@ let g:vimtex_compiler_progname = 'nvr'
 " }}} vimtex "
 " auto-save {{{ "
 Plug '907th/vim-auto-save'
-let g:auto_save = 1  " enable AutoSave on Vim startup
+let g:auto_save = 0  " enable AutoSave on Vim startup
 
 " }}} auto-save "
 " UltiSnips {{{ "
@@ -231,7 +231,7 @@ call plug#end()
 
 "{{{1 UI
 let g:python_highlight_all = 1
-colorscheme my_solarized
+colorscheme dracula
 set mouse=vn
 set showcmd
 if !has('nvim')
@@ -326,6 +326,7 @@ noremap <silent> k gk
 noremap <silent> j gj
 noremap <silent> 0 g0
 noremap <silent> $ gj
+nnoremap <c-d> d%
 " Buffer navigation
 nnoremap <silent> gb    :bnext<cr>
 nnoremap <silent> gB    :bprevious<cr>
@@ -350,7 +351,6 @@ map <F2> :browse oldfiles <CR>
 nnoremap <silent> <leader>xv :source $MYVIMRC <CR>
 nnoremap <silent> <leader>ev :edit $MYVIMRC <CR>
 nnoremap U <C-r>
-nnoremap <silent> <C-d> <C-b>
 map Y y$
 nnoremap gl $
 nnoremap gh ^
