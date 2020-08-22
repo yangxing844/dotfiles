@@ -231,7 +231,7 @@ call plug#end()
 
 "{{{1 UI
 let g:python_highlight_all = 1
-colorscheme my_solarized
+colorscheme dracula
 set mouse=vn
 set showcmd
 if !has('nvim')
@@ -258,6 +258,7 @@ set fillchars=vert:│,fold:\ ,diff:⣿
 
 "{{{1 performance
 syntax on
+set nu
 set nocursorline
 set undolevels=100
 set title
