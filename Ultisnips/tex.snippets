@@ -193,7 +193,7 @@ snippet == "equals" iA
 endsnippet
 
 snippet != "equals" iA
-\neq 
+\neq
 endsnippet
 
 context "math()"
@@ -248,8 +248,9 @@ snippet conj "conjugate" iA
 \overline{$1}$0
 endsnippet
 
-snippet sum "sum" w
-\sum_{n=${1:1}}^{${2:\infty}} ${3:a_n z^n}
+context "math()"
+snippet sum "sum" iA
+\sum_{${1:n=1}}^{${2:\infty}} ${3:a_n z^n}
 endsnippet
 
 snippet taylor "taylor" w
@@ -257,11 +258,11 @@ snippet taylor "taylor" w
 endsnippet
 
 snippet lim "limit" w
-\lim_{${1:n} \to ${2:\infty}} 
+\lim_{${1:n} \to ${2:\infty}}
 endsnippet
 
 snippet limsup "limsup" w
-\limsup_{${1:n} \to ${2:\infty}} 
+\limsup_{${1:n} \to ${2:\infty}}
 endsnippet
 
 snippet prod "product" w
@@ -278,7 +279,7 @@ snippet sq "\sqrt{}" iA
 endsnippet
 
 context "math()"
-snippet df "to the ... power" iA
+snippet jk "to the ... power" iA
 ^{$1}$0
 endsnippet
 
@@ -300,7 +301,7 @@ snippet < "leq" i
 endsnippet
 
 snippet > "geq" i
-\ge 
+\ge
 endsnippet
 
 context "math()"
@@ -352,17 +353,13 @@ endsnippet
 
 context "math()"
 snippet nabl "nabla" iA
-\nabla 
+\nabla
 endsnippet
 
-context "math()"
-snippet xx "cross" iA
-\times 
-endsnippet
 
 priority 100
 snippet ** "cdot" iA
-\cdot 
+\cdot
 endsnippet
 
 context "math()"
@@ -392,7 +389,7 @@ endsnippet
 priority 100
 context "math()"
 snippet -> "to" iA
-\to 
+\to
 endsnippet
 
 priority 200
@@ -403,7 +400,7 @@ endsnippet
 
 context "math()"
 snippet !> "mapsto" iA
-\mapsto 
+\mapsto
 endsnippet
 
 context "math()"
@@ -431,7 +428,7 @@ endsnippet
 
 
 snippet ~~ "~" iA
-\sim 
+\sim
 endsnippet
 
 context "math()"
@@ -440,16 +437,11 @@ snippet set "set" wA
 endsnippet
 
 snippet || "mid" iA
-\mid 
+\mid
 endsnippet
 
 snippet notin "not in " iA
-\not\in 
-endsnippet
-
-context "math()"
-snippet inn "in " iA
-\in 
+\not\in
 endsnippet
 
 snippet NN "n" iA
@@ -457,11 +449,11 @@ snippet NN "n" iA
 endsnippet
 
 snippet Nn "cap" iA
-\cap 
+\cap
 endsnippet
 
 snippet UU "cup" iA
-\cup 
+\cup
 endsnippet
 
 snippet uuu "bigcup" iA
@@ -489,11 +481,11 @@ snippet ZZ "Z" iA
 endsnippet
 
 snippet <! "normal" iA
-\triangleleft 
+\triangleleft
 endsnippet
 
 snippet <> "hokje" iA
-\diamond 
+\diamond
 endsnippet
 
 
@@ -502,10 +494,10 @@ snippet '(?<!i)sts' "text subscript" irA
 _\text{$1} $0
 endsnippet
 
-context "math()"
-snippet tt "text" iA
-\text{$1}$0
-endsnippet
+# context "math()"
+# snippet tt "text" iA
+# \text{$1}$0
+# endsnippet
 
 context "math()"
 snippet case "cases" wA
@@ -568,5 +560,25 @@ endsnippet
 
 snippet lab "Description" b
 ${VISUAL:default} \label{${VISUAL:default}}
+endsnippet
+
+context "math()"
+snippet qw "mathrm" iA
+\mathrm{$1}$0
+endsnippet
+
+context "math()"
+snippet vp "Description" iA
+\varphi
+endsnippet
+
+context "math()"
+snippet l; "Description" iA
+\lambda
+endsnippet
+
+context "math()"
+snippet t; "Description" iA
+\theta
 endsnippet
 # vim:ft=snippets
