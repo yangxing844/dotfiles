@@ -158,7 +158,7 @@ let g:vimtex_compiler_progname = 'nvr'
 " }}} vimtex "
 " auto-save {{{ "
 Plug '907th/vim-auto-save'
-let g:auto_save = 0  " enable AutoSave on Vim startup
+let g:auto_save = 1  " enable AutoSave on Vim startup
 
 " }}} auto-save "
 " UltiSnips {{{ "
@@ -341,7 +341,7 @@ nnoremap d#   *``dgN
 nnoremap dg* g*``dgn
 nnoremap dg# g*``dgN
 nnoremap gV  `[V`]
-nnoremap  <c-e> :CocCommand explorer<CR>
+nnoremap <c-i> :CocCommand explorer<CR>
 nnoremap for :call CocAction('format')<CR>
 nnoremap  <leader>f :FZF<CR>
 nmap  <silent> ++ vip++<esc>
@@ -353,17 +353,16 @@ nnoremap <silent> <leader>xv :source $MYVIMRC <CR>
 nnoremap <silent> <leader>ev :edit $MYVIMRC <CR>
 nnoremap U <C-r>
 map Y y$
-nnoremap gl $
-nnoremap gh ^
-vnoremap gl $
-vnoremap gh ^
+nnoremap <c-e> $
+nnoremap <c-w> ^
+vnoremap <c-e> $
+vnoremap <c-w> ^
 nnoremap <silent> `` :on<CR>
 nnoremap <silent> <space> za
 nnoremap <silent> <C-h> <C-w><C-h>
 nnoremap <silent> <C-j> <C-w><C-j>
 nnoremap <silent> <C-k> <C-w><C-k>
 nnoremap <silent> <C-l> <C-w><C-l>
-nnoremap <silent> <C-i> <C-d>
 nnoremap <silent> <F5> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
           exec "w"
@@ -380,6 +379,8 @@ func! CompileRunGcc()
 				  endif
           endif
 endfunc
+inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
+nnoremap <C-f> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
 "}}}1
 
 "{{{ misc
