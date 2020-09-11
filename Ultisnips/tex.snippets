@@ -23,6 +23,7 @@ snippet template "Basic template" b
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
 \usepackage{ctex}
+\usepackage{graphicx}
 \usepackage{siunitx}
 \usepackage{caption}
 \usepackage{float}
@@ -279,7 +280,7 @@ snippet sq "\sqrt{}" iA
 endsnippet
 
 context "math()"
-snippet jk "to the ... power" iA
+snippet er "to the ... power" iA
 ^{$1}$0
 endsnippet
 
@@ -580,5 +581,20 @@ endsnippet
 context "math()"
 snippet t; "Description" iA
 \theta
+endsnippet
+
+context "math()"
+snippet e; "varspsilon" iA
+\varepsilon
+endsnippet
+
+context "math()"
+snippet "(\\?\w+)(,\.|\.,)" "Vector postfix" riA
+\vec{`!p snip.rv=match.group(1)`}
+endsnippet 
+
+context "math()"
+snippet d; "Description" iA
+\delta
 endsnippet
 # vim:ft=snippets
