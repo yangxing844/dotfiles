@@ -117,8 +117,8 @@ Plug 'plasticboy/vim-markdown',{'for':'markdown'}
 Plug 'yianwillis/vimcdoc'
 " }}} vimdoc "
 " vim-airline {{{ "
-Plug 'bling/vim-airline'
-let g:airline_powerline_fonts = 1
+" Plug 'bling/vim-airline'
+" let g:airline_powerline_fonts = 1
 " }}} vim-airline "
 " asyncrun {{{ "
 Plug 'skywind3000/asyncrun.vim'
@@ -341,7 +341,7 @@ nnoremap d#   *``dgN
 nnoremap dg* g*``dgn
 nnoremap dg# g*``dgN
 nnoremap gV  `[V`]
-nnoremap <c-i> :CocCommand explorer<CR>
+nnoremap <c-e> :CocCommand explorer<CR>
 nnoremap for :call CocAction('format')<CR>
 nnoremap  <leader>f :FZF<CR>
 nmap  <silent> ++ vip++<esc>
@@ -353,10 +353,10 @@ nnoremap <silent> <leader>xv :source $MYVIMRC <CR>
 nnoremap <silent> <leader>ev :edit $MYVIMRC <CR>
 nnoremap U <C-r>
 map Y y$
-nnoremap <c-e> $
-nnoremap <c-w> ^
-vnoremap <c-e> $
-vnoremap <c-w> ^
+nnoremap <c-w> $
+nnoremap <c-q> ^
+vnoremap <c-w> $
+vnoremap <c-q> ^
 nnoremap <silent> `` :on<CR>
 nnoremap <silent> <space> za
 nnoremap <silent> <C-h> <C-w><C-h>
