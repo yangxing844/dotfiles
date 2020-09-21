@@ -29,6 +29,10 @@ snippet template "Basic template" b
 \usepackage{float}
 \usepackage{amsmath, amssymb}
 \usepackage{physics}
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
 \begin{document}
 	$0
 \end{document}
@@ -54,7 +58,7 @@ endsnippet
 snippet fig "Figure environment" b
 \begin{figure}[${1:htpb}]
 	\centering
-	${2:\includegraphics[width=0.8\textwidth]{/home/yangxing/Pics/screenshots${3:name}}}
+	${2:\includegraphics[width=0.8\textwidth]{$3}}
 	\caption*{$4}
 	\label{fig:${5:${3/\W+/-/g}}}
 \end{figure}
@@ -280,7 +284,7 @@ snippet sq "\sqrt{}" iA
 endsnippet
 
 context "math()"
-snippet er "to the ... power" iA
+snippet df "to the ... power" iA
 ^{$1}$0
 endsnippet
 
@@ -518,17 +522,6 @@ snippet cvec "column vector" iA
 \begin{pmatrix} ${1:x}_${2:1}\\\\ \vdots\\\\ $1_${2:n} \end{pmatrix}
 endsnippet
 
-priority 10
-context "math()"
-snippet "bar" "bar" riA
-\overline{$1}$0
-endsnippet
-
-priority 100
-context "math()"
-snippet "([a-zA-Z])bar" "bar" riA
-\overline{`!p snip.rv=match.group(1)`}
-endsnippet
 
 priority 10
 context "math()"
@@ -596,5 +589,10 @@ endsnippet
 context "math()"
 snippet d; "Description" iA
 \delta
+endsnippet
+
+context "math()"
+snippet hb "Description" wA
+\hbar
 endsnippet
 # vim:ft=snippets
