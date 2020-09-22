@@ -117,8 +117,28 @@ Plug 'plasticboy/vim-markdown',{'for':'markdown'}
 Plug 'yianwillis/vimcdoc'
 " }}} vimdoc "
 " vim-airline {{{ "
-" Plug 'bling/vim-airline'
-" let g:airline_powerline_fonts = 1
+Plug 'itchyny/lightline.vim'
+let g:lightline = {
+		\ 'component': {
+		\   'lineinfo': ' %3l:%-2c',
+		\ },
+		\ 'component_function': {
+		\   'readonly': 'LightlineReadonly',
+		\   'fugitive': 'LightlineFugitive'
+		\ },
+		\ 'separator': { 'left': '', 'right': '' },
+		\ 'subseparator': { 'left': '', 'right': '' }
+		\ }
+	function! LightlineReadonly()
+		return &readonly ? '' : ''
+	endfunction
+	function! LightlineFugitive()
+		if exists('*FugitiveHead')
+			let branch = FugitiveHead()
+			return branch !=# '' ? ''.branch : ''
+		endif
+		return ''
+	endfunction
 " }}} vim-airline "
 " asyncrun {{{ "
 Plug 'skywind3000/asyncrun.vim'
