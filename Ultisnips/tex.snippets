@@ -238,15 +238,11 @@ snippet lr| "left| right|" i
 endsnippet
 
 snippet lr{ "left\{ right\}" i
-\left\\{ ${1:${VISUAL}} \right\\} $0
+\left\\{ ${1:${VISUAL}} \right. $0
 endsnippet
 
 snippet lr[ "left[ right]" i
 \left[ ${1:${VISUAL}} \right] $0
-endsnippet
-
-snippet lra "leftangle rightangle" iA
-\left<${1:${VISUAL}} \right>$0
 endsnippet
 
 context "math()"
@@ -303,11 +299,11 @@ snippet rij "mrij" i
 endsnippet
 
 snippet < "leq" i
-\le
+\le 
 endsnippet
 
 snippet > "geq" i
-\ge
+\ge 
 endsnippet
 
 context "math()"
@@ -421,20 +417,20 @@ endsnippet
 
 context "math()"
 snippet \ "setminus" i
-\setminus
+\setminus 
 endsnippet
 
 snippet >> ">>" iA
-\gg
+\gg 
 endsnippet
 
 snippet << "<<" iA
-\ll
+\ll 
 endsnippet
 
 
 snippet ~~ "~" iA
-\sim
+\sim 
 endsnippet
 
 context "math()"
@@ -443,7 +439,7 @@ snippet set "set" wA
 endsnippet
 
 snippet || "mid" iA
-\mid
+\mid 
 endsnippet
 
 snippet notin "not in " iA

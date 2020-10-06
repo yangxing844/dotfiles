@@ -304,6 +304,7 @@ function! Fcitx2zh()
    endif
 endfunction
 
+autocmd FileType tex let b:coc_pairs_disabled = ['<']
 "set timeoutlen=150
 autocmd InsertLeave * call Fcitx2en()
 autocmd InsertEnter * call Fcitx2zh()

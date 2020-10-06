@@ -1,4 +1,4 @@
-{
+{ //python stuff
   "python.jediEnabled": true,
   "python.linting.pylintEnabled": false,
   "python.linting.pep8Enabled": true,
@@ -31,5 +31,7 @@
   "patternMatches": [
     "^\\."
   ]
-}
-}
+  },
+  //coc-pairs
+  "pairs.enableCharacters":["(", "[", "{", "'", "\"", "`"]
+} 
