@@ -99,7 +99,7 @@ Plug 'vim-airline/vim-airline-themes'
 
 " }}} vim-airline "
 " vim-polyglot {{{ "
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
 " }}} vim-polyglot "
 " autopep8 {{{ "
 " Plug 'tell-k/vim-autopep8',{'for':'python'}
