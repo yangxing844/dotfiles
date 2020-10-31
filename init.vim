@@ -402,7 +402,8 @@ endfunc
 inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
 nnoremap <C-f> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
 "}}}1
-
+" reverse by line number
+nnoremap <leader>r :g/^/m0<CR>
 "{{{ misc
 set backspace=indent,eol,start "任何时候都可以输入回车"
 set backspace=2
