@@ -248,7 +248,6 @@ nnoremap <silent> <leader>oo       :call fzf#run(fzf#wrap({
 " }}} fzf "
 call plug#end()
 "}}}1
-
 "{{{1 UI
 let g:python_highlight_all = 1
 colorscheme dracula
@@ -275,7 +274,6 @@ set foldlevelstart=0
 set fillchars=vert:│,fold:\ ,diff:⣿
 "}}}2
 "}}}1
-
 "{{{1 performance
 syntax on
 set nu
@@ -311,7 +309,6 @@ autocmd InsertEnter * call Fcitx2zh()
 endif
 autocmd filetype vim set foldmethod=marker
 "}}}1
-
 "{{{1keymapping
 "dealing with wrapped lines
 noremap <silent> <Leader>w :call ToggleWrap()<CR>
@@ -401,9 +398,9 @@ func! CompileRunGcc()
 endfunc
 inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
 nnoremap <C-f> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
-"}}}1
 " reverse by line number
 nnoremap <leader>r :g/^/m0<CR>
+"}}}1
 "{{{ misc
 set backspace=indent,eol,start "任何时候都可以输入回车"
 set backspace=2
