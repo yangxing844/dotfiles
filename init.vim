@@ -401,9 +401,9 @@ func! CompileRunGcc()
 endfunc
 inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
 nnoremap <C-f> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
-"}}}1
 " reverse by line number
 nnoremap <leader>r :g/^/m0<CR>
+"}}}1
 "{{{ misc
 set backspace=indent,eol,start "任何时候都可以输入回车"
 set backspace=2
@@ -434,3 +434,5 @@ set fileencodings=utf-8,gb2312,gbk,cp936,latin-1
 set fileformat=unix
 set nocompatible
 "}}}1
+
+" TODO: 配置原生状态栏 <02-11-20, yourname> "
