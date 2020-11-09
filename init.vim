@@ -248,7 +248,6 @@ nnoremap <silent> <leader>oo       :call fzf#run(fzf#wrap({
 " }}} fzf "
 call plug#end()
 "}}}1
-
 "{{{1 UI
 let g:python_highlight_all = 1
 colorscheme dracula
@@ -275,7 +274,6 @@ set foldlevelstart=0
 set fillchars=vert:│,fold:\ ,diff:⣿
 "}}}2
 "}}}1
-
 "{{{1 performance
 syntax on
 set nu
@@ -311,7 +309,6 @@ autocmd InsertEnter * call Fcitx2zh()
 endif
 autocmd filetype vim set foldmethod=marker
 "}}}1
-
 "{{{1keymapping
 "dealing with wrapped lines
 noremap <silent> <Leader>w :call ToggleWrap()<CR>
