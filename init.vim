@@ -1,5 +1,3 @@
-"		       (_)
-"		__   __ _  _ __ ___   _ __  ___
 "		\ \ / /| || '_ ` _ \ | '__|/ __|
 "		_\ V / | || | | | | || |  | (__
 "      (_)\_/  |_||_| |_| |_||_|   \___]
@@ -116,7 +114,7 @@ Plug 'plasticboy/vim-markdown',{'for':'markdown'}
 " vimdoc {{{ "
 Plug 'yianwillis/vimcdoc'
 " }}} vimdoc "
-" vim-airline {{{ "
+" statusline {{{ "
 Plug 'itchyny/lightline.vim'
 let g:lightline = {
 		\ 'component': {

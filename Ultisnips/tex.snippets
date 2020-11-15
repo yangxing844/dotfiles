@@ -153,12 +153,12 @@ snip.rv = stripped[0:i] + "\\dfrac{" + stripped[i+1:-1] + "}"
 endsnippet
 
 context "math()"
-snippet '([A-Za-z])\.(\d+|\w+)' "auto subscript" wrA
+snippet '([A-Za-z]|\})\.(\d+|\w+)' "auto subscript" wrA
 `!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
 endsnippet
 
 context "math()"
-snippet '([A-Za-z])(\d+)' "auto subscript2" wrA
+snippet '([A-Za-z]|\})(\d+)' "auto subscript2" wrA
 `!p snip.rv = match.group(1)`^`!p snip.rv = match.group(2)`
 endsnippet
 
@@ -248,7 +248,7 @@ snippet prod "product" w
 endsnippet
 
 snippet part "d/dx" w
-\frac{\partial ${1:V}}{\partial ${2:x}} $0
+\pdv{${1:V}}{${2:x}} $0
 endsnippet
 
 context "math()"
@@ -267,7 +267,7 @@ _{$1}$0
 endsnippet
 
 snippet ooo "\infty" iA
-\infty
+\infty $0
 endsnippet
 
 snippet rij "mrij" i
@@ -325,10 +325,6 @@ snippet mcal "mathcal" iA
 \mathcal{$1}$0
 endsnippet
 
-snippet lll "l" iA
-\ell
-endsnippet
-
 context "math()"
 snippet nabl "nabla" iA
 \nabla
@@ -359,7 +355,7 @@ endsnippet
 
 priority 200
 context "math()"
-snippet '(?<!\\)(arcsin|arccos|arctan|arccot|arccsc|arcsec|pi|zeta|int)' "ln" rwA
+snippet '(?<!\\)(arcsin|arccos|arctan|arccot|arccsc|arcsec|pi|zeta)' "ln" rwA
 \\`!p snip.rv = match.group(1)`
 endsnippet
 
@@ -565,20 +561,20 @@ snippet d; "Description" iA
 endsnippet
 
 context "math()"
-snippet hb "Description" wA
+snippet hb "Description" iA
 \hbar
 endsnippet
 
-snippet Sch "Description" w
+snippet Sch "Description" i
 Schr\"{o}dinger
 endsnippet
 
 context "math()"
-snippet w; "Description" wA
+snippet w; "Description" iA
 \omega
 endsnippet
 
-snippet a; "alpha" wA
+snippet a; "alpha" iA
 \alpha
 endsnippet
 
@@ -599,17 +595,22 @@ snippet head "Description" b
 {\itshape{\textbf{$1}}}$2
 endsnippet
 
-snippet bold "Description" w
+snippet bold "Description" i
 \textbf{$1}$0
 endsnippet
 
 context "math()"
-snippet s; "Description" wA
+snippet s; "Description" iA
 \sigma
 endsnippet
 
 context "math()"
-snippet C "Constance" w
+snippet C "Constance" wb
 \dfrac{1}{4\pi \varepsilon_0}
+endsnippet
+
+context "math()"
+snippet '([A-Za-z]+)x([A-Za-z]+)' "Levi-Civita Symbol" wr
+`!p snip.rv = match.group(1)`_{$1}`!p snip.rv = match.group(2)`_{$2}-`!p snip.rv = match.group(2)`_{$2}`!p snip.rv = match.group(1)`_{$1} $0
 endsnippet
 # vim:ft=snippets
