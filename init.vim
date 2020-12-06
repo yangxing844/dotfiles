@@ -32,8 +32,7 @@ endif
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-eslint',
-  \ 'coc-json',
-  \ 'coc-python'
+  \ 'coc-json'
   \ ]
 nmap <leader>rn <Plug>(coc-rename)
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -96,13 +95,10 @@ Plug 'tpope/vim-commentary'
 Plug 'vim-airline/vim-airline-themes'
 
 " }}} vim-airline "
-" vim-polyglot {{{ "
-" Plug 'sheerun/vim-polyglot'
-" }}} vim-polyglot "
-" autopep8 {{{ "
-" Plug 'tell-k/vim-autopep8',{'for':'python'}
-
-" }}} autopep8 "
+" python-syntax-highlight {{{ "
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+Plug 'vim-python/python-syntax', {'on': []}
+" }}} python-syntax-highlight "
 " tabular {{{ "
 Plug 'godlygeek/tabular',{'for':'markdown'}
 
@@ -124,8 +120,6 @@ let g:lightline = {
 		\   'readonly': 'LightlineReadonly',
 		\   'fugitive': 'LightlineFugitive'
 		\ },
-		\ 'separator': { 'left': '', 'right': '' },
-		\ 'subseparator': { 'left': '', 'right': '' }
 		\ }
 	function! LightlineReadonly()
 		return &readonly ? '' : ''
@@ -140,7 +134,6 @@ let g:lightline = {
 " }}} vim-airline "
 " asyncrun {{{ "
 Plug 'skywind3000/asyncrun.vim'
-
 " }}} asyncrun "
 " tex-conceal {{{ "
 Plug 'KeitaNakamura/tex-conceal.vim',{'for':'tex'}
@@ -168,7 +161,7 @@ let g:tex_stylish = 1
 let g:tex_isk='48-57,a-z,A-Z,192-255,:'
 let g:vimtex_fold_enabled = 1
 let g:vimtex_fold_types = {
-      \ 'markers' : {'enabled': 0},
+      \ 'markers' : {'enabled': 1},
       \ 'sections' : {'parse_levels': 1},
       \}
 let g:vimtex_format_enabled = 1
@@ -244,8 +237,11 @@ nnoremap <silent> <leader>oo       :call fzf#run(fzf#wrap({
       \ ],
       \}))<cr>
 " }}} fzf "
+" auto-pairs {{{ "
+Plug 'jiangmiao/auto-pairs'
+" }}} "
 call plug#end()
-"}}}1
+"}}1
 "{{{1 UI
 let g:python_highlight_all = 1
 colorscheme dracula
@@ -282,6 +278,8 @@ set history=100
 set updatetime=300
 set timeoutlen=500
 set nowrap
+
+" fictx input method 
 if has('unix')
 let g:input_toggle = 1
 function! Fcitx2en()
@@ -342,7 +340,7 @@ endfunction
 noremap <silent> k gk
 noremap <silent> j gj
 noremap <silent> 0 g0
-noremap <silent> $ gj
+" noremap <silent> $ gj
 " Buffer navigation
 nnoremap <silent> gb    :bnext<cr>
 nnoremap <silent> gB    :bprevious<cr>
@@ -356,7 +354,7 @@ nnoremap d#   *``dgN
 nnoremap dg* g*``dgn
 nnoremap dg# g*``dgN
 nnoremap gV  `[V`]
-nnoremap <c-e> :CocCommand explorer<CR>
+nnoremap ff :CocCommand explorer<CR>
 nnoremap for :call CocAction('format')<CR>
 nnoremap  <leader>f :FZF<CR>
 nmap  <silent> ++ vip++<esc>
@@ -368,10 +366,10 @@ nnoremap <silent> <leader>xv :source $MYVIMRC <CR>
 nnoremap <silent> <leader>ev :edit $MYVIMRC <CR>
 nnoremap U <C-r>
 map Y y$
-nnoremap <c-w> $
-nnoremap <c-q> ^
-vnoremap <c-w> $
-vnoremap <c-q> ^
+nnoremap <c-e> $
+nnoremap <c-a> ^
+vnoremap <c-e> $
+vnoremap <c-a> ^
 nnoremap <silent> `` :on<CR>
 nnoremap <silent> <space> za
 nnoremap <silent> <C-h> <C-w><C-h>
@@ -429,5 +427,3 @@ set fileencodings=utf-8,gb2312,gbk,cp936,latin-1
 set fileformat=unix
 set nocompatible
 "}}}1
-
-" TODO: 配置原生状态栏 <02-11-20, yourname> "
