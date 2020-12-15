@@ -35,7 +35,7 @@ let g:coc_global_extensions = [
   \ 'coc-json'
   \ ]
 nmap <leader>rn <Plug>(coc-rename)
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
@@ -85,7 +85,7 @@ Plug 'ryanoasis/vim-devicons'
 " }}} vim-devicons "
 " vim-gitgutter {{{ "
 Plug 'airblade/vim-gitgutter'
-
+let g:gitgutter_highlight_linenrs = 1
 " }}} vim-gitgutter "
 " vim-commentary {{{ "
 Plug 'tpope/vim-commentary'
@@ -96,8 +96,8 @@ Plug 'vim-airline/vim-airline-themes'
 
 " }}} vim-airline "
 " python-syntax-highlight {{{ "
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-Plug 'vim-python/python-syntax', {'on': []}
+Plug 'numirias/semshi', {'for':'python'}
+Plug 'vim-python/python-syntax', {'for':'python'}
 " }}} python-syntax-highlight "
 " tabular {{{ "
 Plug 'godlygeek/tabular',{'for':'markdown'}
@@ -143,33 +143,40 @@ set conceallevel=2
 
 " }}} tex-conceal "
 " vimtex {{{ "
-Plug 'lervag/vimtex'
+Plug 'lervag/vimtex',{'for':'tex'}
 let g:tex_flavor='latex'
-let g:livepreview_previewer = 'zathura'
+let g:vimtex_view_method = 'zathura'
+let g:vimtex_view_automatic = 0
 let g:vimtex_quickfix_mode = 0
-let g:vimtex_quickfix_latexlog = {
-          \ 'overfull' : 0,
-          \ 'underfull' : 0,
-          \ 'packages' : {
-          \ 'default' : 0,
-          \ },
-          \}
+let g:vimtex_matchparen_enabled = 0
+" let g:vimtex_quickfix_latexlog = {
+"           \ 'overfull' : 0,
+"           \ 'underfull' : 0,
+"           \ 'packages' : {
+"           \ 'default' : 0,
+"           \ },
+"           \}
 let g:vimtex_compiler_latexmk_engines = {
 			\ '_'         : '-xelatex --shell-escape'
 			\}
 let g:tex_stylish = 1
+let g:tex_conceal = ''
 let g:tex_isk='48-57,a-z,A-Z,192-255,:'
 let g:vimtex_fold_enabled = 1
 let g:vimtex_fold_types = {
       \ 'markers' : {'enabled': 1},
-      \ 'sections' : {'parse_levels': 1},
       \}
 let g:vimtex_format_enabled = 1
 let g:vimtex_compiler_progname = 'nvr'
+" let g:tex_fast= ""
 " }}} vimtex "
 " auto-save {{{ "
 Plug '907th/vim-auto-save'
-let g:auto_save = 1  " enable AutoSave on Vim startup
+let g:auto_save = 1
+"     augroup ft_tex
+"       au!
+"       au FileType tex let b:auto_save = 0
+"     augroup END
 
 " }}} auto-save "
 " UltiSnips {{{ "
@@ -239,7 +246,14 @@ nnoremap <silent> <leader>oo       :call fzf#run(fzf#wrap({
 " }}} fzf "
 " auto-pairs {{{ "
 Plug 'jiangmiao/auto-pairs'
+let g:AutoPairs={'(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
 " }}} "
+" vim-matchup {{{ "
+Plug 'andymass/vim-matchup'
+" }}} vim-matchup "
+" vim-surround {{{ "
+Plug 'tpope/vim-surround'
+" }}} vim-surround "
 call plug#end()
 "}}1
 "{{{1 UI
@@ -251,7 +265,6 @@ if !has('nvim')
 set guifont=JetBrainsMonoNerdFontCompleteM-Medium:h18
 endif
 set ruler
-let g:python_highlight_all = 1
 if $TERM_PROGRAM =~ "iTerm"
     let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
     let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
@@ -271,11 +284,11 @@ set fillchars=vert:│,fold:\ ,diff:⣿
 "{{{1 performance
 syntax on
 set nu
-set nocursorline
+" set nocursorline
 set undolevels=100
 set title
 set history=100
-set updatetime=300
+set updatetime=100
 set timeoutlen=500
 set nowrap
 
@@ -283,27 +296,27 @@ set nowrap
 if has('unix')
 let g:input_toggle = 1
 function! Fcitx2en()
-   let s:input_status = system("fcitx-remote")
+   let s:input_status = system("fcitx5-remote")
    if s:input_status == 2
       let g:input_toggle = 1
-      let l:a = system("fcitx-remote -c")
+      let l:a = system("fcitx5-remote -c")
    endif
 endfunction
 
 function! Fcitx2zh()
-   let s:input_status = system("fcitx-remote")
+   let s:input_status = system("fcitx5-remote")
    if s:input_status != 2 && g:input_toggle == 1
-      let l:a = system("fcitx-remote -o")
+      let l:a = system("fcitx5-remote -o")
       let g:input_toggle = 0
    endif
 endfunction
 
-autocmd FileType tex let b:coc_pairs_disabled = ['<']
 "set timeoutlen=150
 autocmd InsertLeave * call Fcitx2en()
 autocmd InsertEnter * call Fcitx2zh()
+autocmd FileType tex  let b:AutoPairs =  {'(':')', '[':']', '{':'}','"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
 endif
-autocmd filetype vim set foldmethod=marker
+set foldmethod=marker
 "}}}1
 "{{{1keymapping
 "dealing with wrapped lines
@@ -337,9 +350,9 @@ function ToggleWrap() "{{{2
   endif
 endfunction
 "2}}}
-noremap <silent> k gk
-noremap <silent> j gj
-noremap <silent> 0 g0
+" noremap <silent> k gk
+" noremap <silent> j gj
+" noremap <silent> 0 g0
 " noremap <silent> $ gj
 " Buffer navigation
 nnoremap <silent> gb    :bnext<cr>

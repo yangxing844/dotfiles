@@ -24,12 +24,12 @@
     "log",
     "fdb_latexmk",
     "gz",
-    "xdv"
+    "xdv",
+	"pdf"
   ],
   "filenames": [],
   "patternMatches": [
     "^\\."
   ]
   }
-  //coc-pairs
 } 
