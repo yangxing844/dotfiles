@@ -92,7 +92,7 @@ Plug 'tpope/vim-commentary'
 
 " }}} Fold description "
 " vim-airline-thems {{{ "
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline-themes'
 
 " }}} vim-airline "
 " python-syntax-highlight {{{ "
@@ -113,25 +113,33 @@ Plug 'yianwillis/vimcdoc'
 " statusline {{{ "
 Plug 'itchyny/lightline.vim'
 let g:lightline = {
-		\ 'component': {
-		\   'lineinfo': ' %3l:%-2c',
-		\ },
-		\ 'component_function': {
-		\   'readonly': 'LightlineReadonly',
-		\   'fugitive': 'LightlineFugitive'
-		\ },
-		\ }
-	function! LightlineReadonly()
-		return &readonly ? '' : ''
-	endfunction
-	function! LightlineFugitive()
-		if exists('*FugitiveHead')
-			let branch = FugitiveHead()
-			return branch !=# '' ? ''.branch : ''
-		endif
-		return ''
-	endfunction
-" }}} vim-airline "
+      \ 'colorscheme': 'dracula',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead',
+	  \	  'readonly':  'LightlineReadonly'
+      \ },
+		\ 'mode_map': {
+        \ 'n' : 'N',
+        \ 'i' : 'I',
+        \ 'R' : 'R',
+        \ 'v' : 'V',
+        \ 'V' : 'VL',
+        \ "\<C-v>": 'VB',
+        \ 'c' : 'C',
+        \ 's' : 'S',
+        \ 'S' : 'SL',
+        \ "\<C-s>": 'SB',
+        \ 't': 'T',
+        \ },
+      \ }
+function! LightlineReadonly()
+	return &readonly ? '' : ''
+endfunction
+"}}}
 " asyncrun {{{ "
 Plug 'skywind3000/asyncrun.vim'
 " }}} asyncrun "
@@ -250,12 +258,17 @@ let g:AutoPairs={'(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```'
 " }}} "
 " vim-matchup {{{ "
 Plug 'andymass/vim-matchup'
+let g:matchup_matchparen_offscreen = {'method': 'popup'}
 " }}} vim-matchup "
 " vim-surround {{{ "
 Plug 'tpope/vim-surround'
 " }}} vim-surround "
+" vim-git {{{ "
+Plug 'tpope/vim-fugitive'
+" }}} vim-git "
 call plug#end()
-"}}1
+"}}}1
+
 "{{{1 UI
 let g:python_highlight_all = 1
 colorscheme dracula
@@ -320,35 +333,35 @@ set foldmethod=marker
 "}}}1
 "{{{1keymapping
 "dealing with wrapped lines
-noremap <silent> <Leader>w :call ToggleWrap()<CR>
-function ToggleWrap() "{{{2
-  if &wrap
-    echo "Wrap OFF"
-    setlocal nowrap
-    set virtualedit=all
-    silent! nunmap <buffer> <Up>
-    silent! nunmap <buffer> <Down>
-    silent! nunmap <buffer> <Home>
-    silent! nunmap <buffer> <End>
-    silent! iunmap <buffer> <Up>
-    silent! iunmap <buffer> <Down>
-    silent! iunmap <buffer> <Home>
-    silent! iunmap <buffer> <End>
-  else
-    echo "Wrap ON"
-    setlocal wrap linebreak nolist
-    set virtualedit=
-    setlocal display+=lastline
-    noremap  <buffer> <silent> <Up>   gk
-    noremap  <buffer> <silent> <Down> gj
-    noremap  <buffer> <silent> <Home> g<Home>
-    noremap  <buffer> <silent> <End>  g<End>
-    inoremap <buffer> <silent> <Up>   <C-o>gk
-    inoremap <buffer> <silent> <Down> <C-o>gj
-    inoremap <buffer> <silent> <Home> <C-o>g<Home>
-    inoremap <buffer> <silent> <End>  <C-o>g<End>
-  endif
-endfunction
+" noremap <silent> <Leader>w :call ToggleWrap()<CR>
+" function ToggleWrap() "{{{2
+"   if &wrap
+"     echo "Wrap OFF"
+"     setlocal nowrap
+"     set virtualedit=all
+"     silent! nunmap <buffer> <Up>
+"     silent! nunmap <buffer> <Down>
+"     silent! nunmap <buffer> <Home>
+"     silent! nunmap <buffer> <End>
+"     silent! iunmap <buffer> <Up>
+"     silent! iunmap <buffer> <Down>
+"     silent! iunmap <buffer> <Home>
+"     silent! iunmap <buffer> <End>
+"   else
+"     echo "Wrap ON"
+"     setlocal wrap linebreak nolist
+"     set virtualedit=
+"     setlocal display+=lastline
+"     noremap  <buffer> <silent> <Up>   gk
+"     noremap  <buffer> <silent> <Down> gj
+"     noremap  <buffer> <silent> <Home> g<Home>
+"     noremap  <buffer> <silent> <End>  g<End>
+"     inoremap <buffer> <silent> <Up>   <C-o>gk
+"     inoremap <buffer> <silent> <Down> <C-o>gj
+"     inoremap <buffer> <silent> <Home> <C-o>g<Home>
+"     inoremap <buffer> <silent> <End>  <C-o>g<End>
+"   endif
+" endfunction
 "2}}}
 " noremap <silent> k gk
 " noremap <silent> j gj
@@ -380,7 +393,9 @@ nnoremap <silent> <leader>ev :edit $MYVIMRC <CR>
 nnoremap U <C-r>
 map Y y$
 nnoremap <c-e> $
+inoremap <C-e> <C-o>$
 nnoremap <c-a> ^
+inoremap <C-a> <C-o>^
 vnoremap <c-e> $
 vnoremap <c-a> ^
 nnoremap <silent> `` :on<CR>
@@ -439,4 +454,6 @@ set scrolloff=5
 set fileencodings=utf-8,gb2312,gbk,cp936,latin-1
 set fileformat=unix
 set nocompatible
+set noshowmode "get ride of -- INSERT -- in lightline"
+set tw=78
 "}}}1
