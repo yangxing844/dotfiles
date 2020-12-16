@@ -430,4 +430,3 @@ set fileformat=unix
 set nocompatible
 "}}}1
 
-" TODO: 配置原生状态栏 <02-11-20, yourname> "
