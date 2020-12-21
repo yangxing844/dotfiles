@@ -575,23 +575,23 @@ nnoremap <silent> zb       zb:call context#update('zb')<CR>
 nnoremap <silent> <expr> zt context#util#map_zt()
 nnoremap <silent> <expr> H  context#util#map_H()
 
-function MyContext(line)
-  if index(['markdown', 'wiki'], &filetype) >= 0
-    let indent = indent(a:line)
-    if indent < 0 | return indent | endif
+" function MyContext(line)
+"   if index(['markdown', 'wiki'], &filetype) >= 0
+"     let indent = indent(a:line)
+"     if indent < 0 | return indent | endif
 
-    let line = getline(a:line)
-    let headings = match(line, '^#\+\zs\s')+1
-    if headings <= 0
-      let headings = 5
-    endif
+"     let line = getline(a:line)
+"     let headings = match(line, '^#\+\zs\s')+1
+"     if headings <= 0
+"       let headings = 5
+"     endif
 
-    return indent+headings
-  else
-    return indent(a:line)
-  endif
-endfunction
-let g:Context_indent = funcref('MyContext')
+"     return indent+headings
+"   else
+"     return indent(a:line)
+"   endif
+" endfunction
+" let g:Context_indent = funcref('MyContext')
 
 " }}}2
 " {{{2 plugin: CtrlFS

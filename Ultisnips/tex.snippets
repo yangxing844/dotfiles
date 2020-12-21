@@ -1,6 +1,5 @@
 global !p
-texMathZones = ['texMathRegion' + x for x in ['', 'X', 'XX', 'Env', 'EnvStarred', 'Ensured']]
-
+texMathZones = ['texMathZone' + x for x in ['', 'X', 'XX', 'Env', 'EnvStarred', 'Ensured']]
 texIgnoreMathZones = ['texMathTextArg']
 
 texMathZoneIds = vim.eval('map('+str(texMathZones)+", 'hlID(v:val)')")
@@ -455,20 +454,8 @@ snippet <! "normal" iA
 \triangleleft
 endsnippet
 
-snippet <> "hokje" iA
-\diamond
-endsnippet
 
 
-context "math()"
-snippet '(?<!i)sts' "text subscript" irA
-_\text{$1} $0
-endsnippet
-
-# context "math()"
-# snippet tt "text" iA
-# \text{$1}$0
-# endsnippet
 
 context "math()"
 snippet case "cases" bA
@@ -646,5 +633,9 @@ endsnippet
 
 snippet k; "Description" iA
 \kappa$0
+endsnippet
+
+snippet T; "Description" iA
+\Theta$0
 endsnippet
 # vim:ft=snippets

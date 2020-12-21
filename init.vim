@@ -172,7 +172,8 @@ let g:tex_conceal = ''
 let g:tex_isk='48-57,a-z,A-Z,192-255,:'
 let g:vimtex_fold_enabled = 1
 let g:vimtex_fold_types = {
-      \ 'markers' : {'enabled': 1},
+      \ 'markers' : {'enabled': 0},
+	  \ 'sections' : {'parse_levels': 1}
       \}
 let g:vimtex_format_enabled = 1
 let g:vimtex_compiler_progname = 'nvr'
@@ -295,7 +296,6 @@ set fillchars=vert:│,fold:\ ,diff:⣿
 "}}}2
 "}}}1
 "{{{1 performance
-syntax on
 set nu
 " set nocursorline
 set undolevels=100
@@ -304,7 +304,7 @@ set history=100
 set updatetime=100
 set timeoutlen=500
 set nowrap
-
+set cursorline
 " fictx input method 
 if has('unix')
 let g:input_toggle = 1
@@ -325,11 +325,11 @@ function! Fcitx2zh()
 endfunction
 
 "set timeoutlen=150
-autocmd InsertLeave * call Fcitx2en()
-autocmd InsertEnter * call Fcitx2zh()
+autocmd InsertLeave * call Fcitx2zh()
+autocmd InsertEnter * call Fcitx2en()
 autocmd FileType tex  let b:AutoPairs =  {'(':')', '[':']', '{':'}','"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
 endif
-set foldmethod=marker
+au filetype vim set foldmethod=marker
 "}}}1
 "{{{1keymapping
 "dealing with wrapped lines
@@ -439,9 +439,9 @@ set shiftwidth=4
 set helplang=cn
 set showmatch
 set hlsearch
+set iskeyword+=-
+set iskeyword+=\
 filetype on
-filetype plugin on
-filetype indent on
 set cindent
 set autowrite
 set clipboard+=unnamedplus
@@ -455,5 +455,5 @@ set fileencodings=utf-8,gb2312,gbk,cp936,latin-1
 set fileformat=unix
 set nocompatible
 set noshowmode "get ride of -- INSERT -- in lightline"
-set tw=78
+set tw=100
 "}}}1
